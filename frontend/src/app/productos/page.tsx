@@ -5,12 +5,28 @@ import { productoService, ProductoRequest } from '@/services/productoService';
 import { Producto } from '@/types';
 import { opcionService } from '@/services/opcionService';
 import { Atributo } from '@/types';
+// 1. IMPORTAR EL NUEVO COMPONENTE
+import AlertModal from '@/components/AlertModal';
 
 export default function ProductosPage() {
   const [productos, setProductos] = useState<Producto[]>([]);
   const [loading, setLoading] = useState(true);
   const [idEdicion, setIdEdicion] = useState<number | null>(null);
   const [todosAtributos, setTodosAtributos] = useState<Atributo[]>([]);
+
+  // 2. ESTADO PARA EL MODAL DE ALERTAS
+  const [alertConfig, setAlertConfig] = useState<{
+    isOpen: boolean;
+    type: 'success' | 'error' | 'confirm';
+    title: string;
+    message: string;
+    onConfirm?: () => void;
+  }>({
+    isOpen: false,
+    type: 'success', // valor por defecto
+    title: '',
+    message: ''
+  });
 
   // ESTADO PARA ORDENAMIENTO
   const [sortConfig, setSortConfig] = useState<{ key: string; direction: 'asc' | 'desc' }>({ key: 'nombre', direction: 'asc' });
@@ -23,6 +39,30 @@ export default function ProductosPage() {
 
   const [tamanioCm, setTamanioCm] = useState<string>('');
 
+  // --- HELPERS PARA MOSTRAR MODALES ---
+  const showSuccess = (msg: string) => {
+    setAlertConfig({ isOpen: true, type: 'success', title: '¡Éxito!', message: msg });
+  };
+
+  const showError = (msg: string) => {
+    setAlertConfig({ isOpen: true, type: 'error', title: 'Error', message: msg });
+  };
+
+  const showConfirm = (msg: string, action: () => void) => {
+    setAlertConfig({
+      isOpen: true,
+      type: 'confirm',
+      title: '¿Estás seguro?',
+      message: msg,
+      onConfirm: action
+    });
+  };
+
+  const closeAlert = () => {
+    setAlertConfig(prev => ({ ...prev, isOpen: false }));
+  };
+  // -------------------------------------
+
   const cargarDatos = async () => {
     try {
       const [prods, attrs] = await Promise.all([
@@ -32,7 +72,8 @@ export default function ProductosPage() {
       setProductos(prods);
       setTodosAtributos(attrs);
     } catch (error) {
-      alert('Error cargando datos');
+      console.error(error);
+      // Opcional: showError("No se pudieron cargar los datos");
     } finally {
       setLoading(false);
     }
@@ -44,13 +85,16 @@ export default function ProductosPage() {
 
   const handleGuardar = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!nuevoProd.nombre.trim()) return alert("⚠️ El nombre es obligatorio");
-    if (nuevoProd.precioBase <= 0) return alert("⚠️ El precio debe ser mayor a 0");
+
+    // 3. REEMPLAZO DE ALERTS NATIVOS POR showError
+    if (!nuevoProd.nombre.trim()) return showError("⚠️ El nombre es obligatorio");
+    if (nuevoProd.precioBase <= 0) return showError("⚠️ El precio debe ser mayor a 0");
 
     let unidadFinal = nuevoProd.unidad;
+
     if (nuevoProd.unidad === 'cm') {
       if (!tamanioCm || parseFloat(tamanioCm) <= 0) {
-        return alert("⚠️ Por favor ingresa un tamaño en cm válido.");
+        return showError("⚠️ Por favor ingresa un tamaño en cm válido (mayor a 0).");
       }
       unidadFinal = `${tamanioCm} cm`;
     }
@@ -60,15 +104,15 @@ export default function ProductosPage() {
     try {
       if (idEdicion) {
         await productoService.actualizar(idEdicion, productoAEnviar);
-        alert("✅ Producto actualizado");
+        showSuccess("Producto actualizado correctamente");
       } else {
         await productoService.crear(productoAEnviar);
-        alert("✅ Producto creado");
+        showSuccess("Producto creado exitosamente");
       }
       limpiarFormulario();
       cargarDatos();
     } catch (error) {
-      alert("❌ Error al guardar producto");
+      showError("Ocurrió un problema al guardar el producto");
     }
   };
 
@@ -101,13 +145,20 @@ export default function ProductosPage() {
     setTamanioCm('');
   };
 
-  const handleBorrar = async (id: number) => {
-    if (confirm('¿Desactivar este producto?')) {
-      await productoService.eliminar(id);
-      cargarDatos();
-    }
+  // 4. REEMPLAZO DE CONFIRM NATIVO POR showConfirm
+  const handleBorrar = (id: number) => {
+    showConfirm('¿Deseas desactivar este producto? Dejará de estar visible para ventas.', async () => {
+      try {
+        await productoService.eliminar(id);
+        showSuccess("Producto desactivado");
+        cargarDatos();
+      } catch (error) {
+        showError("No se pudo desactivar el producto");
+      }
+    });
   };
 
+  // Lógica de ordenamiento (sin cambios)
   const toggleAtributo = (idAttr: number) => {
     const actuales = nuevoProd.idsAtributosValidos || [];
     if (actuales.includes(idAttr)) {
@@ -117,7 +168,6 @@ export default function ProductosPage() {
     }
   };
 
-  // --- LÓGICA DE ORDENAMIENTO ---
   const handleSort = (key: string) => {
     let direction: 'asc' | 'desc' = 'asc';
     if (sortConfig.key === key && sortConfig.direction === 'asc') {
@@ -129,13 +179,8 @@ export default function ProductosPage() {
   const productosOrdenados = [...productos].sort((a, b) => {
     const { key, direction } = sortConfig;
     let comparison = 0;
-
-    if (key === 'nombre') {
-      comparison = a.nombre.localeCompare(b.nombre);
-    } else if (key === 'precio') {
-      comparison = a.precioBase - b.precioBase;
-    }
-
+    if (key === 'nombre') comparison = a.nombre.localeCompare(b.nombre);
+    else if (key === 'precio') comparison = a.precioBase - b.precioBase;
     return direction === 'asc' ? comparison : -comparison;
   });
 
@@ -145,12 +190,22 @@ export default function ProductosPage() {
   };
 
   return (
-    <main className="pb-10">
+    <main className="pb-10 relative">
+      {/* 5. INSERTAR EL COMPONENTE MODAL AQUÍ */}
+      <AlertModal
+        isOpen={alertConfig.isOpen}
+        type={alertConfig.type}
+        title={alertConfig.title}
+        message={alertConfig.message}
+        onClose={closeAlert}
+        onConfirm={alertConfig.onConfirm}
+      />
+
       <h1 className="text-3xl font-bold mb-6 text-pink-600 border-b pb-2">
         Inventario de Productos
       </h1>
 
-      {/* FORMULARIO (Se mantiene igual) */}
+      {/* FORMULARIO */}
       <div className={`p-6 rounded-lg shadow-md mb-8 border transition-colors ${idEdicion ? 'bg-blue-50 border-blue-200' : 'bg-white border-pink-100'}`}>
         <div className="flex justify-between items-center mb-4">
           <h2 className={`text-lg font-bold ${idEdicion ? 'text-blue-700' : 'text-gray-700'}`}>
@@ -167,7 +222,8 @@ export default function ProductosPage() {
           <div className="flex-1 min-w-[200px]">
             <label className="block text-sm font-medium text-gray-700">Nombre</label>
             <input
-              type="text" required
+              type="text"
+              // Quitamos 'required' nativo para probar nuestras validaciones personalizadas
               className="border p-2 rounded w-full"
               value={nuevoProd.nombre}
               onChange={e => setNuevoProd({ ...nuevoProd, nombre: e.target.value })}
@@ -195,7 +251,7 @@ export default function ProductosPage() {
               <label className="block text-sm font-medium text-pink-600">Tamaño</label>
               <div className="relative">
                 <input
-                  type="number" required min="1"
+                  type="number" min="1"
                   className="border border-pink-300 p-2 rounded w-full outline-pink-500"
                   value={tamanioCm}
                   onChange={e => setTamanioCm(e.target.value)}
@@ -209,7 +265,7 @@ export default function ProductosPage() {
             <div className="relative">
               <span className="absolute left-2 top-2 text-gray-500">$</span>
               <input
-                type="number" required min="1" step="0.01"
+                type="number" min="1" step="0.01"
                 className="border p-2 pl-6 rounded w-full"
                 value={nuevoProd.precioBase}
                 onChange={e => setNuevoProd({ ...nuevoProd, precioBase: parseFloat(e.target.value) })}

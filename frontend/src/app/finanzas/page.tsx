@@ -4,11 +4,25 @@ import { useEffect, useState } from 'react';
 import { gastoService } from '@/services/gastoService';
 import { pedidoService } from '@/services/pedidoService';
 import { Gasto, GastoRequest } from '@/types';
+import AlertModal from '@/components/AlertModal'; // <--- IMPORTAR
 
 export default function FinanzasPage() {
   const [gastos, setGastos] = useState<Gasto[]>([]);
   const [ingresos, setIngresos] = useState<number>(0);
   const [loading, setLoading] = useState(true);
+
+  // --- ESTADO DEL MODAL ---
+  const [alertConfig, setAlertConfig] = useState<{
+    isOpen: boolean;
+    type: 'success' | 'error' | 'confirm';
+    title: string;
+    message: string;
+    onConfirm?: () => void;
+  }>({ isOpen: false, type: 'success', title: '', message: '' });
+
+  const showError = (msg: string) => setAlertConfig({ isOpen: true, type: 'error', title: 'Error', message: msg });
+  const showConfirm = (msg: string, onConfirm: () => void) => setAlertConfig({ isOpen: true, type: 'confirm', title: 'Confirmar', message: msg, onConfirm });
+  const closeAlert = () => setAlertConfig(prev => ({ ...prev, isOpen: false }));
 
   const [nuevoGasto, setNuevoGasto] = useState<GastoRequest>({
     descripcion: '',
@@ -25,19 +39,16 @@ export default function FinanzasPage() {
 
       setGastos(listaGastos.reverse());
 
-      // --- CAMBIO AQUÍ: Sumar solo pedidos NO cancelados ---
+      // Sumar solo pedidos NO cancelados
       const totalVentas = listaPedidos.reduce((acc, pedido) => {
-        // Si el pedido está cancelado, lo ignoramos (retornamos el acumulador sin sumar)
         if (pedido.cancelado) return acc;
-
-        // Si está activo, sumamos su total
         return acc + (pedido.total || 0);
       }, 0);
 
       setIngresos(totalVentas);
 
     } catch (error) {
-      alert("Error cargando finanzas");
+      console.error(error);
     } finally {
       setLoading(false);
     }
@@ -49,22 +60,26 @@ export default function FinanzasPage() {
 
   const handleGuardar = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!nuevoGasto.descripcion || nuevoGasto.monto <= 0) return alert("Datos inválidos");
+    if (!nuevoGasto.descripcion || nuevoGasto.monto <= 0) return showError("Datos inválidos. Revisa el monto y la descripción.");
 
     try {
       await gastoService.crear(nuevoGasto);
       setNuevoGasto({ ...nuevoGasto, descripcion: '', monto: 0 });
       cargarDatos();
     } catch (error) {
-      alert("Error guardando gasto");
+      showError("Error al guardar el gasto");
     }
   };
 
-  const handleBorrar = async (id: number) => {
-    if (confirm("¿Eliminar este registro de gasto?")) {
-      await gastoService.eliminar(id);
-      cargarDatos();
-    }
+  const handleBorrar = (id: number) => {
+    showConfirm("¿Eliminar este registro de gasto?", async () => {
+      try {
+        await gastoService.eliminar(id);
+        cargarDatos();
+      } catch (error) {
+        showError("No se pudo eliminar el gasto");
+      }
+    });
   };
 
   const totalGastos = gastos.reduce((acc, g) => acc + (g.monto || 0), 0);
@@ -72,7 +87,16 @@ export default function FinanzasPage() {
   const esRentable = gananciaNeta >= 0;
 
   return (
-    <main className="pb-10">
+    <main className="pb-10 relative">
+      <AlertModal
+        isOpen={alertConfig.isOpen}
+        type={alertConfig.type}
+        title={alertConfig.title}
+        message={alertConfig.message}
+        onClose={closeAlert}
+        onConfirm={alertConfig.onConfirm}
+      />
+
       <h1 className="text-3xl font-bold mb-6 text-pink-600 border-b pb-2">
         💰 Finanzas y Balance
       </h1>
@@ -187,7 +211,6 @@ export default function FinanzasPage() {
             </table>
           </div>
         </div>
-
       </div>
     </main>
   );
