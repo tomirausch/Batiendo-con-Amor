@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { productoService, ProductoRequest } from '@/services/productoService';
 import { Producto } from '@/types';
 import { opcionService } from '@/services/opcionService';
-import { Atributo  } from '@/types';
+import { Atributo } from '@/types';
 
 export default function ProductosPage() {
   const [productos, setProductos] = useState<Producto[]>([]);
@@ -14,7 +14,7 @@ export default function ProductosPage() {
 
   // ESTADO DEL FORMULARIO
   const [nuevoProd, setNuevoProd] = useState<ProductoRequest>({
-    nombre: '', unidad: 'unidad', precioBase: 0, 
+    nombre: '', unidad: 'unidad', precioBase: 0,
     idsAtributosValidos: [] // <--- NUEVO
   });
 
@@ -47,14 +47,14 @@ export default function ProductosPage() {
 
   const handleGuardar = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // 1. Validaciones Básicas
     if (!nuevoProd.nombre.trim()) return alert("⚠️ El nombre es obligatorio");
     if (nuevoProd.precioBase <= 0) return alert("⚠️ El precio debe ser mayor a 0");
 
     // 2. Lógica Especial para "cm"
     let unidadFinal = nuevoProd.unidad;
-    
+
     if (nuevoProd.unidad === 'cm') {
       // Validamos que el tamaño sea positivo
       if (!tamanioCm || parseFloat(tamanioCm) <= 0) {
@@ -84,18 +84,18 @@ export default function ProductosPage() {
 
   const cargarParaEditar = (prod: Producto) => {
     setIdEdicion(prod.idProducto);
-    
+
     // Lógica Inversa: Detectar si la unidad guardada es tipo "23 cm"
     let unitSelect = prod.unidad || 'unidad';
     let sizeInput = '';
 
     // Si termina en " cm" (espacio + cm), intentamos extraer el número
     if (prod.unidad && prod.unidad.endsWith(' cm')) {
-        const partes = prod.unidad.split(' '); // ["23", "cm"]
-        if (partes.length === 2 && !isNaN(Number(partes[0]))) {
-            sizeInput = partes[0]; // "23"
-            unitSelect = 'cm';     // Seleccionamos "cm" en el dropdown
-        }
+      const partes = prod.unidad.split(' '); // ["23", "cm"]
+      if (partes.length === 2 && !isNaN(Number(partes[0]))) {
+        sizeInput = partes[0]; // "23"
+        unitSelect = 'cm';     // Seleccionamos "cm" en el dropdown
+      }
     }
 
     setNuevoProd({
@@ -147,7 +147,7 @@ export default function ProductosPage() {
 
       {/* --- FORMULARIO --- */}
       <div className={`p-6 rounded-lg shadow-md mb-8 border transition-colors ${idEdicion ? 'bg-blue-50 border-blue-200' : 'bg-white border-pink-100'}`}>
-        
+
         <div className="flex justify-between items-center mb-4">
           <h2 className={`text-lg font-bold ${idEdicion ? 'text-blue-700' : 'text-gray-700'}`}>
             {idEdicion ? `✏️ Editando: ${nuevoProd.nombre}` : '🍰 Nuevo Producto'}
@@ -163,24 +163,24 @@ export default function ProductosPage() {
           {/* Nombre */}
           <div className="flex-1 min-w-[200px]">
             <label className="block text-sm font-medium text-gray-700">Nombre</label>
-            <input 
+            <input
               type="text" required
               className="border p-2 rounded w-full"
               placeholder="Ej: Torta Bombón"
               value={nuevoProd.nombre}
-              onChange={e => setNuevoProd({...nuevoProd, nombre: e.target.value})}
+              onChange={e => setNuevoProd({ ...nuevoProd, nombre: e.target.value })}
             />
           </div>
 
           {/* Unidad (Selector) */}
           <div className="w-32">
             <label className="block text-sm font-medium text-gray-700">Unidad</label>
-            <select 
+            <select
               className="border p-2 rounded w-full bg-white h-[42px]"
               value={nuevoProd.unidad}
               onChange={e => {
-                setNuevoProd({...nuevoProd, unidad: e.target.value});
-                if(e.target.value !== 'cm') setTamanioCm(''); // Limpiar si cambia
+                setNuevoProd({ ...nuevoProd, unidad: e.target.value });
+                if (e.target.value !== 'cm') setTamanioCm(''); // Limpiar si cambia
               }}
             >
               <option value="unidad">Unidad</option>
@@ -196,7 +196,7 @@ export default function ProductosPage() {
             <div className="w-24 animate-fade-in">
               <label className="block text-sm font-medium text-pink-600">Tamaño</label>
               <div className="relative">
-                <input 
+                <input
                   type="number" required min="1"
                   className="border border-pink-300 p-2 rounded w-full outline-pink-500"
                   placeholder="23"
@@ -212,32 +212,31 @@ export default function ProductosPage() {
           <div className="w-32">
             <label className="block text-sm font-medium text-gray-700">Precio Base</label>
             <div className="relative">
-                <span className="absolute left-2 top-2 text-gray-500">$</span>
-                <input 
+              <span className="absolute left-2 top-2 text-gray-500">$</span>
+              <input
                 type="number" required min="1" step="0.01"
                 className="border p-2 pl-6 rounded w-full"
                 placeholder="0.00"
                 value={nuevoProd.precioBase}
-                onChange={e => setNuevoProd({...nuevoProd, precioBase: parseFloat(e.target.value)})}
-                />
+                onChange={e => setNuevoProd({ ...nuevoProd, precioBase: parseFloat(e.target.value) })}
+              />
             </div>
           </div>
-          
+
           <div className="w-full mt-2 border-t pt-3 animate-fade-in">
             <label className="block text-sm font-bold text-gray-700 mb-2">
               ¿Qué ingredientes/extras permite?
             </label>
             <div className="flex flex-wrap gap-3">
               {todosAtributos.length > 0 ? todosAtributos.map(attr => (
-                <label 
-                  key={attr.idAtributo} 
-                  className={`flex items-center gap-2 cursor-pointer px-3 py-1 rounded border transition-colors select-none ${
-                    nuevoProd.idsAtributosValidos?.includes(attr.idAtributo)
-                      ? 'bg-pink-100 border-pink-300 text-pink-700'
-                      : 'bg-white border-gray-200 text-gray-600 hover:border-pink-200'
-                  }`}
+                <label
+                  key={attr.idAtributo}
+                  className={`flex items-center gap-2 cursor-pointer px-3 py-1 rounded border transition-colors select-none ${nuevoProd.idsAtributosValidos?.includes(attr.idAtributo)
+                    ? 'bg-pink-100 border-pink-300 text-pink-700'
+                    : 'bg-white border-gray-200 text-gray-600 hover:border-pink-200'
+                    }`}
                 >
-                  <input 
+                  <input
                     type="checkbox"
                     className="accent-pink-500 w-4 h-4"
                     checked={nuevoProd.idsAtributosValidos?.includes(attr.idAtributo)}
@@ -253,9 +252,9 @@ export default function ProductosPage() {
               * Si no marcas ninguno, el producto no tendrá opciones de personalización.
             </p>
           </div>
-      
-          <button 
-            type="submit" 
+
+          <button
+            type="submit"
             className={`font-bold py-2 px-6 rounded transition h-[42px] ${idEdicion ? 'bg-blue-600 hover:bg-blue-700 text-white' : 'bg-pink-500 hover:bg-pink-600 text-white'}`}
           >
             {idEdicion ? 'Actualizar' : 'Guardar'}
@@ -281,12 +280,12 @@ export default function ProductosPage() {
                 <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">{p.nombre}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-green-600 font-bold">$ {p.precioBase.toLocaleString()}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-gray-500">
-                    {/* Si es una medida especial (contiene números), la destacamos un poco */}
-                    {/\d/.test(p.unidad) ? (
-                        <span className="bg-gray-100 px-2 py-1 rounded text-xs font-bold text-gray-700 border border-gray-300">
-                            {p.unidad}
-                        </span>
-                    ) : p.unidad}
+                  {/* Si es una medida especial (contiene números), la destacamos un poco */}
+                  {/\d/.test(p.unidad) ? (
+                    <span className="bg-gray-100 px-2 py-1 rounded text-xs font-bold text-gray-700 border border-gray-300">
+                      {p.unidad}
+                    </span>
+                  ) : p.unidad}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   {p.activo ? (
@@ -296,14 +295,14 @@ export default function ProductosPage() {
                   )}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                   <div className="flex justify-end gap-3 opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity">
-                      <button onClick={() => cargarParaEditar(p)} className="text-blue-500 hover:text-blue-700 font-bold">✏️ Editar</button>
-                      {p.activo ? (
-                        <button onClick={() => handleBorrar(p.idProducto)} className="text-red-500 hover:text-red-700 font-bold">✕ Baja</button>
-                      ) : (
-                        <button onClick={async () => { await productoService.activar(p.idProducto); cargarDatos(); }} className="text-green-600 hover:text-green-800 font-bold">⟳ Alta</button>
-                      )}
-                   </div>
+                  <div className="flex justify-end gap-3">
+                    <button onClick={() => cargarParaEditar(p)} className="text-blue-500 hover:text-blue-700 font-bold">✏️ Editar</button>
+                    {p.activo ? (
+                      <button onClick={() => handleBorrar(p.idProducto)} className="text-red-500 hover:text-red-700 font-bold">✕ Baja</button>
+                    ) : (
+                      <button onClick={async () => { await productoService.activar(p.idProducto); cargarDatos(); }} className="text-green-600 hover:text-green-800 font-bold">⟳ Alta</button>
+                    )}
+                  </div>
                 </td>
               </tr>
             ))}
