@@ -12,21 +12,22 @@ export default function ProductosPage() {
   const [idEdicion, setIdEdicion] = useState<number | null>(null);
   const [todosAtributos, setTodosAtributos] = useState<Atributo[]>([]);
 
+  // ESTADO PARA ORDENAMIENTO
+  const [sortConfig, setSortConfig] = useState<{ key: string; direction: 'asc' | 'desc' }>({ key: 'nombre', direction: 'asc' });
+
   // ESTADO DEL FORMULARIO
   const [nuevoProd, setNuevoProd] = useState<ProductoRequest>({
     nombre: '', unidad: 'unidad', precioBase: 0,
-    idsAtributosValidos: [] // <--- NUEVO
+    idsAtributosValidos: []
   });
 
-  // ESTADO EXTRA: Para el tamaño personalizado (cm)
   const [tamanioCm, setTamanioCm] = useState<string>('');
 
   const cargarDatos = async () => {
     try {
-      // Usamos Promise.all para traer todo junto y rápido
       const [prods, attrs] = await Promise.all([
         productoService.listar(false),
-        opcionService.listarAtributos() // Trae las categorías
+        opcionService.listarAtributos()
       ]);
       setProductos(prods);
       setTodosAtributos(attrs);
@@ -38,33 +39,22 @@ export default function ProductosPage() {
   };
 
   useEffect(() => {
-    cargarDatos(); // Llamamos a la nueva función
-  }, []);
-
-  useEffect(() => {
     cargarDatos();
   }, []);
 
   const handleGuardar = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    // 1. Validaciones Básicas
     if (!nuevoProd.nombre.trim()) return alert("⚠️ El nombre es obligatorio");
     if (nuevoProd.precioBase <= 0) return alert("⚠️ El precio debe ser mayor a 0");
 
-    // 2. Lógica Especial para "cm"
     let unidadFinal = nuevoProd.unidad;
-
     if (nuevoProd.unidad === 'cm') {
-      // Validamos que el tamaño sea positivo
       if (!tamanioCm || parseFloat(tamanioCm) <= 0) {
-        return alert("⚠️ Por favor ingresa un tamaño en cm válido (mayor a 0).");
+        return alert("⚠️ Por favor ingresa un tamaño en cm válido.");
       }
-      // Combinamos el número con la unidad para guardarlo en BD (Ej: "23 cm")
       unidadFinal = `${tamanioCm} cm`;
     }
 
-    // Preparamos el objeto para enviar
     const productoAEnviar = { ...nuevoProd, unidad: unidadFinal };
 
     try {
@@ -84,17 +74,14 @@ export default function ProductosPage() {
 
   const cargarParaEditar = (prod: Producto) => {
     setIdEdicion(prod.idProducto);
-
-    // Lógica Inversa: Detectar si la unidad guardada es tipo "23 cm"
     let unitSelect = prod.unidad || 'unidad';
     let sizeInput = '';
 
-    // Si termina en " cm" (espacio + cm), intentamos extraer el número
     if (prod.unidad && prod.unidad.endsWith(' cm')) {
-      const partes = prod.unidad.split(' '); // ["23", "cm"]
+      const partes = prod.unidad.split(' ');
       if (partes.length === 2 && !isNaN(Number(partes[0]))) {
-        sizeInput = partes[0]; // "23"
-        unitSelect = 'cm';     // Seleccionamos "cm" en el dropdown
+        sizeInput = partes[0];
+        unitSelect = 'cm';
       }
     }
 
@@ -105,14 +92,13 @@ export default function ProductosPage() {
       idsAtributosValidos: prod.atributosValidos?.map(a => a.idAtributo) || []
     });
     setTamanioCm(sizeInput);
-
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const limpiarFormulario = () => {
     setIdEdicion(null);
     setNuevoProd({ nombre: '', unidad: 'unidad', precioBase: 0, idsAtributosValidos: [] });
-    setTamanioCm(''); // Limpiamos también el extra
+    setTamanioCm('');
   };
 
   const handleBorrar = async (id: number) => {
@@ -125,18 +111,37 @@ export default function ProductosPage() {
   const toggleAtributo = (idAttr: number) => {
     const actuales = nuevoProd.idsAtributosValidos || [];
     if (actuales.includes(idAttr)) {
-      // Si ya estaba, lo sacamos (filtro)
-      setNuevoProd({
-        ...nuevoProd,
-        idsAtributosValidos: actuales.filter(id => id !== idAttr)
-      });
+      setNuevoProd({ ...nuevoProd, idsAtributosValidos: actuales.filter(id => id !== idAttr) });
     } else {
-      // Si no estaba, lo agregamos
-      setNuevoProd({
-        ...nuevoProd,
-        idsAtributosValidos: [...actuales, idAttr]
-      });
+      setNuevoProd({ ...nuevoProd, idsAtributosValidos: [...actuales, idAttr] });
     }
+  };
+
+  // --- LÓGICA DE ORDENAMIENTO ---
+  const handleSort = (key: string) => {
+    let direction: 'asc' | 'desc' = 'asc';
+    if (sortConfig.key === key && sortConfig.direction === 'asc') {
+      direction = 'desc';
+    }
+    setSortConfig({ key, direction });
+  };
+
+  const productosOrdenados = [...productos].sort((a, b) => {
+    const { key, direction } = sortConfig;
+    let comparison = 0;
+
+    if (key === 'nombre') {
+      comparison = a.nombre.localeCompare(b.nombre);
+    } else if (key === 'precio') {
+      comparison = a.precioBase - b.precioBase;
+    }
+
+    return direction === 'asc' ? comparison : -comparison;
+  });
+
+  const getSortIcon = (columnKey: string) => {
+    if (sortConfig.key !== columnKey) return <span className="text-gray-300 ml-1">↕</span>;
+    return sortConfig.direction === 'asc' ? <span className="ml-1 text-pink-600">⬆</span> : <span className="ml-1 text-pink-600">⬇</span>;
   };
 
   return (
@@ -145,9 +150,8 @@ export default function ProductosPage() {
         Inventario de Productos
       </h1>
 
-      {/* --- FORMULARIO --- */}
+      {/* FORMULARIO (Se mantiene igual) */}
       <div className={`p-6 rounded-lg shadow-md mb-8 border transition-colors ${idEdicion ? 'bg-blue-50 border-blue-200' : 'bg-white border-pink-100'}`}>
-
         <div className="flex justify-between items-center mb-4">
           <h2 className={`text-lg font-bold ${idEdicion ? 'text-blue-700' : 'text-gray-700'}`}>
             {idEdicion ? `✏️ Editando: ${nuevoProd.nombre}` : '🍰 Nuevo Producto'}
@@ -160,19 +164,15 @@ export default function ProductosPage() {
         </div>
 
         <form onSubmit={handleGuardar} className="flex flex-wrap gap-4 items-end">
-          {/* Nombre */}
           <div className="flex-1 min-w-[200px]">
             <label className="block text-sm font-medium text-gray-700">Nombre</label>
             <input
               type="text" required
               className="border p-2 rounded w-full"
-              placeholder="Ej: Torta Bombón"
               value={nuevoProd.nombre}
               onChange={e => setNuevoProd({ ...nuevoProd, nombre: e.target.value })}
             />
           </div>
-
-          {/* Unidad (Selector) */}
           <div className="w-32">
             <label className="block text-sm font-medium text-gray-700">Unidad</label>
             <select
@@ -180,18 +180,16 @@ export default function ProductosPage() {
               value={nuevoProd.unidad}
               onChange={e => {
                 setNuevoProd({ ...nuevoProd, unidad: e.target.value });
-                if (e.target.value !== 'cm') setTamanioCm(''); // Limpiar si cambia
+                if (e.target.value !== 'cm') setTamanioCm('');
               }}
             >
               <option value="unidad">Unidad</option>
               <option value="kg">Kg</option>
               <option value="docena">Docena</option>
               <option value="porcion">Porción</option>
-              <option value="cm">cm (Diámetro)</option> {/* Opción especial */}
+              <option value="cm">cm (Diámetro)</option>
             </select>
           </div>
-
-          {/* Input Condicional: Solo aparece si eliges "cm" */}
           {nuevoProd.unidad === 'cm' && (
             <div className="w-24 animate-fade-in">
               <label className="block text-sm font-medium text-pink-600">Tamaño</label>
@@ -199,7 +197,6 @@ export default function ProductosPage() {
                 <input
                   type="number" required min="1"
                   className="border border-pink-300 p-2 rounded w-full outline-pink-500"
-                  placeholder="23"
                   value={tamanioCm}
                   onChange={e => setTamanioCm(e.target.value)}
                 />
@@ -207,8 +204,6 @@ export default function ProductosPage() {
               </div>
             </div>
           )}
-
-          {/* Precio */}
           <div className="w-32">
             <label className="block text-sm font-medium text-gray-700">Precio Base</label>
             <div className="relative">
@@ -216,7 +211,6 @@ export default function ProductosPage() {
               <input
                 type="number" required min="1" step="0.01"
                 className="border p-2 pl-6 rounded w-full"
-                placeholder="0.00"
                 value={nuevoProd.precioBase}
                 onChange={e => setNuevoProd({ ...nuevoProd, precioBase: parseFloat(e.target.value) })}
               />
@@ -232,8 +226,8 @@ export default function ProductosPage() {
                 <label
                   key={attr.idAtributo}
                   className={`flex items-center gap-2 cursor-pointer px-3 py-1 rounded border transition-colors select-none ${nuevoProd.idsAtributosValidos?.includes(attr.idAtributo)
-                    ? 'bg-pink-100 border-pink-300 text-pink-700'
-                    : 'bg-white border-gray-200 text-gray-600 hover:border-pink-200'
+                      ? 'bg-pink-100 border-pink-300 text-pink-700'
+                      : 'bg-white border-gray-200 text-gray-600 hover:border-pink-200'
                     }`}
                 >
                   <input
@@ -248,9 +242,6 @@ export default function ProductosPage() {
                 <span className="text-xs text-gray-400 italic">No hay categorías de ingredientes creadas.</span>
               )}
             </div>
-            <p className="text-xs text-gray-400 mt-1">
-              * Si no marcas ninguno, el producto no tendrá opciones de personalización.
-            </p>
           </div>
 
           <button
@@ -262,27 +253,42 @@ export default function ProductosPage() {
         </form>
       </div>
 
-      {/* --- TABLA --- */}
+      {/* TABLA DE PRODUCTOS */}
       <div className="bg-white rounded-lg shadow overflow-hidden">
         <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-pink-50">
+          <thead className="bg-pink-50 select-none">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nombre</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Precio Base</th>
+              <th
+                className="px-6 py-3 text-left text-xs font-bold text-gray-600 uppercase cursor-pointer hover:bg-pink-100 transition"
+                onClick={() => handleSort('nombre')}
+              >
+                Nombre {getSortIcon('nombre')}
+              </th>
+              <th
+                className="px-6 py-3 text-left text-xs font-bold text-gray-600 uppercase cursor-pointer hover:bg-pink-100 transition"
+                onClick={() => handleSort('precio')}
+              >
+                Precio Base {getSortIcon('precio')}
+              </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Unidad / Tam.</th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Estado</th>
               <th className="px-6 py-3 text-right">Acciones</th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {productos.map((p) => (
-              <tr key={p.idProducto} className={!p.activo ? "bg-gray-50 opacity-60" : "hover:bg-gray-50 group"}>
-                <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">{p.nombre}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-green-600 font-bold">$ {p.precioBase.toLocaleString()}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-gray-500">
-                  {/* Si es una medida especial (contiene números), la destacamos un poco */}
+            {productosOrdenados.map((p) => (
+              <tr key={p.idProducto} className={!p.activo ? "bg-gray-100 text-gray-500" : "hover:bg-gray-50"}>
+                <td className="px-6 py-4 whitespace-nowrap font-medium">
+                  {p.nombre}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap font-bold">
+                  <span className={p.activo ? "text-green-600" : ""}>
+                    $ {p.precioBase.toLocaleString()}
+                  </span>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
                   {/\d/.test(p.unidad) ? (
-                    <span className="bg-gray-100 px-2 py-1 rounded text-xs font-bold text-gray-700 border border-gray-300">
+                    <span className="bg-white px-2 py-1 rounded text-xs font-bold border border-gray-200">
                       {p.unidad}
                     </span>
                   ) : p.unidad}

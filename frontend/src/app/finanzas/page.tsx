@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { gastoService } from '@/services/gastoService';
 import { pedidoService } from '@/services/pedidoService';
-import { Gasto, GastoRequest, Pedido } from '@/types';
+import { Gasto, GastoRequest } from '@/types';
 
 export default function FinanzasPage() {
   const [gastos, setGastos] = useState<Gasto[]>([]);
@@ -11,8 +11,8 @@ export default function FinanzasPage() {
   const [loading, setLoading] = useState(true);
 
   const [nuevoGasto, setNuevoGasto] = useState<GastoRequest>({
-    descripcion: '', 
-    monto: 0, 
+    descripcion: '',
+    monto: 0,
     fecha: new Date().toISOString().split('T')[0]
   });
 
@@ -25,8 +25,15 @@ export default function FinanzasPage() {
 
       setGastos(listaGastos.reverse());
 
-      // PROTECCIÓN 1: (pedido.total || 0)
-      const totalVentas = listaPedidos.reduce((acc, pedido) => acc + (pedido.total || 0), 0);
+      // --- CAMBIO AQUÍ: Sumar solo pedidos NO cancelados ---
+      const totalVentas = listaPedidos.reduce((acc, pedido) => {
+        // Si el pedido está cancelado, lo ignoramos (retornamos el acumulador sin sumar)
+        if (pedido.cancelado) return acc;
+
+        // Si está activo, sumamos su total
+        return acc + (pedido.total || 0);
+      }, 0);
+
       setIngresos(totalVentas);
 
     } catch (error) {
@@ -46,21 +53,20 @@ export default function FinanzasPage() {
 
     try {
       await gastoService.crear(nuevoGasto);
-      setNuevoGasto({ ...nuevoGasto, descripcion: '', monto: 0 }); 
-      cargarDatos(); 
+      setNuevoGasto({ ...nuevoGasto, descripcion: '', monto: 0 });
+      cargarDatos();
     } catch (error) {
       alert("Error guardando gasto");
     }
   };
 
   const handleBorrar = async (id: number) => {
-    if(confirm("¿Eliminar este registro de gasto?")) {
+    if (confirm("¿Eliminar este registro de gasto?")) {
       await gastoService.eliminar(id);
       cargarDatos();
     }
   };
 
-  // PROTECCIÓN 2: (g.monto || 0)
   const totalGastos = gastos.reduce((acc, g) => acc + (g.monto || 0), 0);
   const gananciaNeta = ingresos - totalGastos;
   const esRentable = gananciaNeta >= 0;
@@ -73,7 +79,7 @@ export default function FinanzasPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
         <div className="bg-white p-6 rounded-xl shadow border-l-4 border-green-500">
-          <p className="text-gray-500 text-sm font-bold uppercase">Total Ventas</p>
+          <p className="text-gray-500 text-sm font-bold uppercase">Total Ventas (Reales)</p>
           <p className="text-3xl font-bold text-green-600 mt-1">
             $ {ingresos.toLocaleString()}
           </p>
@@ -95,45 +101,45 @@ export default function FinanzasPage() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        
+
         <div className="bg-white p-6 rounded-lg shadow h-fit border border-pink-100">
           <h2 className="text-lg font-bold mb-4 text-gray-700">Registrar Gasto / Compra</h2>
           <form onSubmit={handleGuardar} className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700">Descripción</label>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 placeholder="Ej: 10kg Harina 0000"
                 className="w-full border p-2 rounded mt-1"
                 value={nuevoGasto.descripcion}
-                onChange={e => setNuevoGasto({...nuevoGasto, descripcion: e.target.value})}
+                onChange={e => setNuevoGasto({ ...nuevoGasto, descripcion: e.target.value })}
               />
             </div>
-            
+
             <div className="grid grid-cols-2 gap-2">
               <div>
                 <label className="block text-sm font-medium text-gray-700">Monto ($)</label>
-                <input 
-                  type="number" 
+                <input
+                  type="number"
                   placeholder="0"
                   className="w-full border p-2 rounded mt-1"
                   value={nuevoGasto.monto}
-                  onChange={e => setNuevoGasto({...nuevoGasto, monto: parseFloat(e.target.value)})}
+                  onChange={e => setNuevoGasto({ ...nuevoGasto, monto: parseFloat(e.target.value) })}
                 />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700">Fecha</label>
-                <input 
+                <input
                   type="date"
                   className="w-full border p-2 rounded mt-1"
                   value={nuevoGasto.fecha}
-                  onChange={e => setNuevoGasto({...nuevoGasto, fecha: e.target.value})}
+                  onChange={e => setNuevoGasto({ ...nuevoGasto, fecha: e.target.value })}
                 />
               </div>
             </div>
 
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               className="w-full bg-red-500 text-white font-bold py-2 rounded hover:bg-red-600 transition"
             >
               - Registrar Egreso
@@ -162,14 +168,13 @@ export default function FinanzasPage() {
                     <td className="px-6 py-4 font-medium text-gray-800">
                       {g.descripcion}
                     </td>
-                    
-                    {/* PROTECCIÓN 3: (g.monto || 0) */}
+
                     <td className="px-6 py-4 whitespace-nowrap text-right text-red-600 font-bold">
                       - $ {(g.monto || 0).toLocaleString()}
                     </td>
-                    
+
                     <td className="px-6 py-4 text-right">
-                      <button 
+                      <button
                         onClick={() => handleBorrar(g.idGasto)}
                         className="text-gray-300 hover:text-red-500"
                       >

@@ -4,6 +4,8 @@ import com.batiendoconamor.backend.dto.request.PedidoRequestDTO;
 import com.batiendoconamor.backend.entity.Pedido;
 import com.batiendoconamor.backend.service.PedidoService;
 
+import jakarta.validation.Valid;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,7 @@ public class PedidoController {
     private PedidoService pedidoService;
 
     @PostMapping
-    public ResponseEntity<Pedido> crear(@RequestBody PedidoRequestDTO dto) {
+    public ResponseEntity<Pedido> crear(@Valid @RequestBody PedidoRequestDTO dto) {
         return ResponseEntity.ok(pedidoService.crearPedido(dto));
     }
 
