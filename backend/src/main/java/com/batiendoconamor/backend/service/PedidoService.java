@@ -10,6 +10,8 @@ import jakarta.transaction.Transactional;
 public interface PedidoService {
     @Transactional
     public Pedido crearPedido(PedidoRequestDTO dto);
-    
+
     public List<Pedido> listarTodos();
+
+    public void cancelarPedido(Long id);
 }

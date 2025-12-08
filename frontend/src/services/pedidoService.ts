@@ -12,5 +12,9 @@ export const pedidoService = {
   crear: async (pedido: PedidoRequest): Promise<Pedido> => {
     const response = await api.post<Pedido>('/pedidos', pedido);
     return response.data;
+  },
+
+  cancelar: async (id: number): Promise<void> => {
+    await api.delete(`/pedidos/${id}`);
   }
 };

@@ -29,13 +29,16 @@ public class Pedido {
     private Cliente cliente;
 
     // Relación Uno a Muchos con Detalle
-    // mappedBy: indica que el dueño de la relación es el campo "pedido" en DetallePedido
+    // mappedBy: indica que el dueño de la relación es el campo "pedido" en
+    // DetallePedido
     // orphanRemoval = true: Si borras un detalle de la lista, se borra de la BD.
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DetallePedido> detalles = new ArrayList<>();
 
     @Column(length = 500)
     private String observaciones;
+
+    private boolean cancelado = false;
 
     // Método helper para mantener la consistencia bidireccional
     public void agregarDetalle(DetallePedido detalle) {

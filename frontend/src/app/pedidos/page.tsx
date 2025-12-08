@@ -40,7 +40,7 @@ export default function PedidosPage() {
         <h1 className="text-3xl font-bold text-pink-600">
           📝 Historial de Pedidos
         </h1>
-        <Link 
+        <Link
           href="/pedidos/nuevo" // <--- RUTA QUE CREAREMOS DESPUÉS
           className="bg-pink-500 text-white px-6 py-2 rounded-lg font-bold shadow hover:bg-pink-600 transition"
         >
@@ -49,9 +49,9 @@ export default function PedidosPage() {
       </div>
 
       {/* Si hay un pedido seleccionado, el Modal se muestra automáticamente */}
-      <PedidoModal 
-        pedido={pedidoSeleccionado} 
-        onClose={() => setPedidoSeleccionado(null)} 
+      <PedidoModal
+        pedido={pedidoSeleccionado}
+        onClose={() => setPedidoSeleccionado(null)}
       />
 
       {loading ? <p>Cargando ventas...</p> : (
@@ -69,7 +69,7 @@ export default function PedidosPage() {
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {pedidos.map((p) => (
-                <tr key={p.idPedido} className="hover:bg-gray-50">
+                <tr key={p.idPedido} className={`hover:bg-gray-50 ${p.cancelado ? 'bg-red-50' : ''}`}>
                   <td className="px-6 py-4 whitespace-nowrap text-gray-500">
                     #{p.idPedido}
                   </td>
@@ -98,23 +98,42 @@ export default function PedidosPage() {
                       ))}
                     </ul>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-right text-lg font-bold text-green-600">
-                    $ {p.total.toLocaleString()}
+                  <td className="px-6 py-4 whitespace-nowrap text-right text-lg font-bold">
+                    {p.cancelado ? (
+                      <span className="text-red-500 text-sm bg-red-100 px-2 py-1 rounded">CANCELADO</span>
+                    ) : (
+                      <span className="text-green-600">$ {p.total.toLocaleString()}</span>
+                    )}
                   </td>
 
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <button 
+                    <button
                       onClick={() => setPedidoSeleccionado(p)}
                       className="text-blue-500 hover:text-blue-700 font-bold bg-blue-50 px-3 py-1 rounded border border-blue-200"
                     >
                       👁️ Ver Detalle
                     </button>
+
+                    {!p.cancelado && (
+                      <button
+                        onClick={async () => {
+                          if (confirm('¿Seguro que quieres CANCELAR este pedido?')) {
+                            await pedidoService.cancelar(p.idPedido);
+                            cargarPedidos(); // Recargar la lista
+                          }
+                        }}
+                        className="text-red-500 hover:text-red-700 font-bold bg-red-50 px-3 py-1 rounded border border-red-200"
+                        title="Cancelar Pedido"
+                      >
+                        ✕
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-          
+
           {pedidos.length === 0 && (
             <div className="p-10 text-center text-gray-500">
               No hay pedidos registrados aún. ¡Crea el primero!

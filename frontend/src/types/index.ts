@@ -58,6 +58,7 @@ export interface Pedido {
   cliente: Cliente; // Reutilizamos la interfaz Cliente
   detalles: DetallePedido[];
   observaciones?: string;
+  cancelado: boolean;
 }
 
 // --- TIPOS DE PEDIDO (Escritura / Crear) ---

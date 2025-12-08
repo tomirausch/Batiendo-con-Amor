@@ -21,9 +21,15 @@ public class PedidoController {
     public ResponseEntity<Pedido> crear(@RequestBody PedidoRequestDTO dto) {
         return ResponseEntity.ok(pedidoService.crearPedido(dto));
     }
-    
+
     @GetMapping
     public ResponseEntity<List<Pedido>> listarPedidos() {
         return ResponseEntity.ok(pedidoService.listarTodos());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> cancelar(@PathVariable Long id) {
+        pedidoService.cancelarPedido(id);
+        return ResponseEntity.noContent().build();
     }
 }

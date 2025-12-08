@@ -1,4 +1,4 @@
-'use client'; // 1. Convertimos a Client Component para usar hooks
+'use client';
 
 import { useEffect, useState } from 'react';
 import Link from "next/link";
@@ -22,21 +22,25 @@ export default function Dashboard() {
         const mesActual = hoy.getMonth();
         const anioActual = hoy.getFullYear();
 
-        // --- 1. PEDIDOS PENDIENTES (Desde hoy en adelante) ---
-        // Normalizamos "hoy" para que la hora sea 00:00:00 y no afecte la comparación
+        // Normalizamos "hoy" para que la hora sea 00:00:00
         hoy.setHours(0, 0, 0, 0);
 
+        // --- 1. PEDIDOS PENDIENTES (No cancelados y fecha >= hoy) ---
         const pendientes = pedidos.filter(p => {
-          // Asumimos que fechaEntrega viene como "YYYY-MM-DD" o ISO
-          // Le agregamos "T00:00:00" para asegurar que se interprete como local o UTC según convenga,
-          // pero para simplificar, usaremos new Date(p.fechaEntrega) directo.
+          if (p.cancelado) return false; // Ignorar cancelados
+
           const fechaEntrega = new Date(p.fechaEntrega);
-          // Ajustamos zona horaria si es necesario, pero por ahora comparamos directo
-          return fechaEntrega >= hoy;
+          // Ajustamos la zona horaria sumando el offset si es necesario, 
+          // pero para comparaciones simples de día esto suele bastar:
+          fechaEntrega.setHours(0, 0, 0, 0);
+
+          return fechaEntrega.getTime() >= hoy.getTime();
         }).length;
 
-        // --- 2. INGRESOS DEL MES ---
+        // --- 2. INGRESOS DEL MES (No cancelados) ---
         const ingresos = pedidos.reduce((acc, p) => {
+          if (p.cancelado) return acc; // Ignorar cancelados
+
           const fecha = new Date(p.fechaEntrega);
           if (fecha.getMonth() === mesActual && fecha.getFullYear() === anioActual) {
             return acc + (p.total || 0);
@@ -44,10 +48,12 @@ export default function Dashboard() {
           return acc;
         }, 0);
 
-        // --- 3. MEJOR CLIENTE (El que más gastó históricamente) ---
+        // --- 3. MEJOR CLIENTE (No cancelados) ---
         const gastosPorCliente: Record<string, number> = {};
 
         pedidos.forEach(p => {
+          if (p.cancelado) return; // Ignorar cancelados
+
           const nombreCompleto = `${p.cliente.nombre} ${p.cliente.apellido}`;
           if (!gastosPorCliente[nombreCompleto]) {
             gastosPorCliente[nombreCompleto] = 0;

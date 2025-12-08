@@ -15,21 +15,25 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class PedidoServiceImpl implements PedidoService{
+public class PedidoServiceImpl implements PedidoService {
 
-    @Autowired private PedidoRepository pedidoRepository;
-    @Autowired private ProductoRepository productoRepository;
-    @Autowired private OpcionAtributoRepository opcionRepository;
-    @Autowired private ClienteRepository clienteRepository;
+    @Autowired
+    private PedidoRepository pedidoRepository;
+    @Autowired
+    private ProductoRepository productoRepository;
+    @Autowired
+    private OpcionAtributoRepository opcionRepository;
+    @Autowired
+    private ClienteRepository clienteRepository;
 
     @Transactional // Importante: Si algo falla, hace rollback de todo
     public Pedido crearPedido(PedidoRequestDTO dto) {
-        
+
         // 1. Crear la cabecera del pedido
         Pedido pedido = new Pedido();
         pedido.setFechaEmitido(LocalDateTime.now());
         pedido.setFechaEntrega(dto.getFechaEntrega().atStartOfDay()); // Convertimos LocalDate a LocalDateTime
-        
+
         // Buscamos el cliente (lanzamos error si no existe)
         Cliente cliente = clienteRepository.findById(dto.getIdCliente())
                 .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
@@ -44,13 +48,14 @@ public class PedidoServiceImpl implements PedidoService{
         // 2. Iterar sobre los productos del JSON
         for (DetalleRequestDTO detDto : dto.getDetalles()) {
             DetallePedido detalle = new DetallePedido();
-            
+
             // A. Buscar Producto y congelar precio base
             Producto producto = productoRepository.findById(detDto.getIdProducto())
                     .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
-            
+
             if (!producto.isActivo()) {
-                throw new RuntimeException("El producto '" + producto.getNombre() + "' no está disponible para la venta");
+                throw new RuntimeException(
+                        "El producto '" + producto.getNombre() + "' no está disponible para la venta");
             }
 
             detalle.setProducto(producto);
@@ -66,13 +71,13 @@ public class PedidoServiceImpl implements PedidoService{
             if (detDto.getIdsOpciones() != null) {
                 for (Long idOpcion : detDto.getIdsOpciones()) {
                     DetalleOpcion detOpcion = new DetalleOpcion();
-                    
+
                     OpcionAtributo opcion = opcionRepository.findById(idOpcion)
                             .orElseThrow(() -> new RuntimeException("Opción no encontrada"));
 
                     detOpcion.setOpcionAtributo(opcion);
                     detOpcion.setPrecioExtraHistorico(opcion.getPrecioExtra()); // <--- SNAPSHOT
-                    
+
                     // Vinculamos (Relación Padre-Hijo)
                     detalle.agregarOpcion(detOpcion);
 
@@ -80,16 +85,16 @@ public class PedidoServiceImpl implements PedidoService{
                     // Ej: Si son 2 tortas, el extra de "frutillas" se cobra 2 veces
                     BigDecimal costoExtraTotal = opcion.getPrecioExtra()
                             .multiply(new BigDecimal(detDto.getCantidad()));
-                    
+
                     subtotalDetalle = subtotalDetalle.add(costoExtraTotal);
                 }
             }
 
             detalle.setSubtotal(subtotalDetalle);
-            
+
             // Vinculamos detalle al pedido
             pedido.agregarDetalle(detalle);
-            
+
             // Sumamos al total general
             totalPedido = totalPedido.add(subtotalDetalle);
         }
@@ -102,5 +107,13 @@ public class PedidoServiceImpl implements PedidoService{
 
     public List<Pedido> listarTodos() {
         return pedidoRepository.findAll();
+    }
+
+    public void cancelarPedido(Long id) {
+        Pedido pedido = pedidoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pedido no encontrado"));
+
+        pedido.setCancelado(true);
+        pedidoRepository.save(pedido);
     }
 }
