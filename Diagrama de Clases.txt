@@ -1,0 +1,72 @@
+@startuml
+
+' ==========================
+' 📦 DIAGRAMA DE CLASES - ENTIDADES
+' ==========================
+
+class Cliente {
+    - idCliente : int
+    - nombre : String
+    - apellido : String
+    - direccion : String
+    - telefono : String
+    - activo : boolean
+}
+
+class Producto {
+    - idProducto : int
+    - nombre : String
+    - unidad : String
+    - precioBase : double
+    - activo : boolean
+}
+
+class Atributo {
+    - idAtributo : int
+    - nombre : String
+}
+
+class OpcionAtributo {
+    - idOpcion : int
+    - nombre : String
+    - precioExtra : double
+}
+
+class ProductoAtributo {
+    - idProducto : int
+    - idAtributo : int
+}
+
+class Pedido {
+    - idPedido : int
+    - fechaEntrega : LocalDate
+    - fechaEmitido : LocalDate 
+    - total : double
+}
+
+class DetallePedido {
+    - idDetalle : int
+    - cantidad : int
+    - subtotal : double
+}
+
+class DetalleOpcion {
+    - idDetalle : int
+    - idOpcion : int
+    - precioHistorico : double
+}
+
+' ==========================
+' 🔗 RELACIONES ENTRE CLASES
+' ==========================
+
+Cliente "1" -- "*" Pedido
+Pedido "1" -- "*" DetallePedido
+DetallePedido "1" -- "1" Producto
+Producto "1" -- "*" ProductoAtributo
+ProductoAtributo "*" -- "1" Atributo
+Atributo "1" -- "*" OpcionAtributo
+DetallePedido "1" -- "*" DetalleOpcion
+DetalleOpcion "*" -- "1" OpcionAtributo
+
+@enduml
