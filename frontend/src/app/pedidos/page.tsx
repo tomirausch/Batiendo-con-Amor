@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { pedidoService } from '@/services/pedidoService';
 import { Pedido } from '@/types';
 import PedidoModal from '@/components/PedidoModal';
+import AlertModal from '@/components/AlertModal';
 
 export default function PedidosPage() {
   const [pedidos, setPedidos] = useState<Pedido[]>([]);
@@ -13,6 +14,20 @@ export default function PedidosPage() {
 
   // ESTADO PARA EL ORDENAMIENTO
   const [sortConfig, setSortConfig] = useState<{ key: string; direction: 'asc' | 'desc' }>({ key: 'entrega', direction: 'desc' });
+
+  // --- ESTADO DEL MODAL ---
+  const [alertConfig, setAlertConfig] = useState<{
+    isOpen: boolean;
+    type: 'success' | 'error' | 'confirm';
+    title: string;
+    message: string;
+    onConfirm?: () => void;
+  }>({ isOpen: false, type: 'success', title: '', message: '' });
+
+  // --- HELPERS DEL MODAL ---
+  const showError = (msg: string) => setAlertConfig({ isOpen: true, type: 'error', title: 'Error', message: msg });
+  const showConfirm = (msg: string, onConfirm: () => void) => setAlertConfig({ isOpen: true, type: 'confirm', title: '¿Estás seguro?', message: msg, onConfirm });
+  const closeAlert = () => setAlertConfig(prev => ({ ...prev, isOpen: false }));
 
   useEffect(() => {
     cargarPedidos();
@@ -23,7 +38,7 @@ export default function PedidosPage() {
       const data = await pedidoService.listar();
       setPedidos(data); // Guardamos los datos crudos, el ordenamiento se hace en el render
     } catch (error) {
-      alert("Error cargando pedidos");
+      showError("Error cargando pedidos");
     } finally {
       setLoading(false);
     }
@@ -72,6 +87,14 @@ export default function PedidosPage() {
 
   return (
     <main>
+      <AlertModal
+        isOpen={alertConfig.isOpen}
+        type={alertConfig.type}
+        title={alertConfig.title}
+        message={alertConfig.message}
+        onClose={closeAlert}
+        onConfirm={alertConfig.onConfirm}
+      />
       <div className="flex justify-between items-center mb-6 border-b pb-4">
         <h1 className="text-3xl font-bold text-pink-600">
           📝 Historial de Pedidos
@@ -113,73 +136,145 @@ export default function PedidosPage() {
                   Cliente {getSortIcon('cliente')}
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Resumen</th>
+                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">Estado</th>
+                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">Pago</th>
                 <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Total</th>
                 <th className="px-6 py-3 text-right">Acciones</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {pedidosOrdenados.map((p) => (
-                <tr key={p.idPedido} className={`hover:bg-gray-50 ${p.cancelado ? 'bg-red-50' : ''}`}>
-                  <td className="px-6 py-4 whitespace-nowrap text-gray-500">
-                    #{p.idPedido}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className="font-medium text-gray-700">
-                      {formatearFecha(p.fechaEntrega)}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="font-bold text-gray-900">{p.cliente.nombre} {p.cliente.apellido}</div>
-                    <div className="text-xs text-gray-400">{p.cliente.telefono}</div>
-                  </td>
-                  <td className="px-6 py-4 text-sm text-gray-600">
-                    <ul className="list-disc list-inside">
-                      {p.detalles.map((d, index) => (
-                        <li key={index}>
-                          <span className="font-medium">{d.cantidad}x {d.producto.nombre}</span>
-                          {d.opciones.length > 0 && (
-                            <span className="text-gray-400 text-xs ml-1">
-                              ({d.opciones.map(opt => opt.opcionAtributo.nombre).join(', ')})
-                            </span>
-                          )}
-                        </li>
-                      ))}
-                    </ul>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-right text-lg font-bold text-green-600">
-                    {p.cancelado ? (
-                      <span className="text-red-500 text-sm bg-red-100 px-2 py-1 rounded">CANCELADO</span>
-                    ) : (
-                      <span className="text-green-600">$ {p.total.toLocaleString()}</span>
-                    )}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <div className="flex justify-end gap-2">
-                      <button
-                        onClick={() => setPedidoSeleccionado(p)}
-                        className="text-blue-500 hover:text-blue-700 font-bold bg-blue-50 px-3 py-1 rounded border border-blue-200"
-                      >
-                        👁️ Ver
-                      </button>
+              {pedidosOrdenados.map((p) => {
+                const now = new Date();
+                const fechaEntrega = new Date(p.fechaEntrega);
 
-                      {!p.cancelado && (
-                        <button
-                          onClick={async () => {
-                            if (confirm('¿Seguro que quieres CANCELAR este pedido?')) {
-                              await pedidoService.cancelar(p.idPedido);
-                              cargarPedidos();
-                            }
-                          }}
-                          className="text-red-500 hover:text-red-700 font-bold bg-red-50 px-3 py-1 rounded border border-red-200"
-                          title="Cancelar Pedido"
-                        >
-                          ✕
-                        </button>
+                // Determinamos estado
+                let estadoLabel = <span className="text-yellow-600 bg-yellow-100 px-2 py-1 rounded text-sm font-bold">Pendiente</span>;
+                let isAtrasado = false;
+
+                if (p.cancelado) {
+                  estadoLabel = <span className="text-red-600 bg-red-100 px-2 py-1 rounded text-sm font-bold">CANCELADO</span>;
+                } else if (p.entregado) {
+                  estadoLabel = <span className="text-green-600 bg-green-100 px-2 py-1 rounded text-sm font-bold">ENTREGADO</span>;
+                } else if (fechaEntrega < now) {
+                  // Si no está entregado, ni cancelado, y ya pasó la fecha
+                  isAtrasado = true;
+                  estadoLabel = <span className="text-orange-600 bg-orange-100 px-2 py-1 rounded text-sm font-bold">ATRASADO</span>;
+                }
+
+                return (
+                  <tr key={p.idPedido} className={`hover:bg-gray-50 ${p.cancelado ? 'bg-red-50' : ''}`}>
+                    <td className="px-6 py-4 whitespace-nowrap text-gray-500">
+                      #{p.idPedido}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <span className={`font-medium ${isAtrasado ? 'text-red-600 font-bold' : 'text-gray-700'}`}>
+                        {formatearFecha(p.fechaEntrega)}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="font-bold text-gray-900">{p.cliente.nombre} {p.cliente.apellido}</div>
+                      <div className="text-xs text-gray-400">{p.cliente.telefono}</div>
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-600">
+                      <ul className="list-disc list-inside">
+                        {p.detalles.map((d, index) => (
+                          <li key={index}>
+                            <span className="font-medium">{d.cantidad}x {d.producto.nombre}</span>
+                            {d.opciones.length > 0 && (
+                              <span className="text-gray-400 text-xs ml-1">
+                                ({d.opciones.map(opt => opt.opcionAtributo.nombre).join(', ')})
+                              </span>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    </td>
+
+                    <td className="px-6 py-4 whitespace-nowrap text-center">
+                      {estadoLabel}
+                    </td>
+
+                    <td className="px-6 py-4 whitespace-nowrap text-center">
+                      {p.pagado ? (
+                        <span className="text-green-600 bg-green-50 border border-green-200 px-2 py-1 rounded text-xs font-bold">PAGADO</span>
+                      ) : (
+                        <span className="text-gray-500 bg-gray-100 border border-gray-200 px-2 py-1 rounded text-xs font-bold">PENDIENTE</span>
                       )}
-                    </div>
-                  </td>
-                </tr>
-              ))}
+                    </td>
+
+                    <td className="px-6 py-4 whitespace-nowrap text-right text-lg font-bold text-green-600">
+                      <span className="text-green-600">$ {p.total.toLocaleString()}</span>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                      <div className="flex justify-end gap-2">
+                        {!p.cancelado && !p.entregado && (
+                          <button
+                            onClick={() => {
+                              showConfirm('¿Marcar pedido como ENTREGADO?', async () => {
+                                try {
+                                  await pedidoService.entregar(p.idPedido);
+                                  cargarPedidos();
+                                } catch (e) {
+                                  showError("No se pudo marcar como entregado");
+                                }
+                              });
+                            }}
+                            className="text-green-600 hover:text-green-800 font-bold bg-green-50 px-3 py-1 rounded border border-green-200"
+                            title="Marcar como Entregado"
+                          >
+                            ✔
+                          </button>
+                        )}
+
+                        {!p.cancelado && !p.pagado && (
+                          <button
+                            onClick={() => {
+                              showConfirm('¿Confirmar que el pedido fue PAGADO?', async () => {
+                                try {
+                                  await pedidoService.pagar(p.idPedido);
+                                  cargarPedidos();
+                                } catch (e) {
+                                  showError("No se pudo registrar el pago");
+                                }
+                              });
+                            }}
+                            className="text-green-600 hover:text-green-800 font-bold bg-green-50 px-3 py-1 rounded border border-green-200"
+                            title="Registrar Pago"
+                          >
+                            💲
+                          </button>
+                        )}
+
+                        <button
+                          onClick={() => setPedidoSeleccionado(p)}
+                          className="text-blue-500 hover:text-blue-700 font-bold bg-blue-50 px-3 py-1 rounded border border-blue-200"
+                        >
+                          👁️
+                        </button>
+
+                        {!p.cancelado && !p.entregado && (
+                          <button
+                            onClick={() => {
+                              showConfirm('¿Seguro que quieres CANCELAR este pedido?', async () => {
+                                try {
+                                  await pedidoService.cancelar(p.idPedido);
+                                  cargarPedidos();
+                                } catch (e) {
+                                  showError("No se pudo cancelar el pedido");
+                                }
+                              });
+                            }}
+                            className="text-red-500 hover:text-red-700 font-bold bg-red-50 px-3 py-1 rounded border border-red-200"
+                            title="Cancelar Pedido"
+                          >
+                            ✕
+                          </button>
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
 

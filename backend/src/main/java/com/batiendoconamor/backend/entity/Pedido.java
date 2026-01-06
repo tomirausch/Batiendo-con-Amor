@@ -39,6 +39,8 @@ public class Pedido {
     private String observaciones;
 
     private boolean cancelado = false;
+    private boolean entregado = false;
+    private boolean pagado = false;
 
     // Método helper para mantener la consistencia bidireccional
     public void agregarDetalle(DetallePedido detalle) {

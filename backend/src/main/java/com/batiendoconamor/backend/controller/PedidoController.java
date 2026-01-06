@@ -34,4 +34,16 @@ public class PedidoController {
         pedidoService.cancelarPedido(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/{id}/entregar")
+    public ResponseEntity<Void> entregar(@PathVariable Long id) {
+        pedidoService.entregarPedido(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/{id}/pagar")
+    public ResponseEntity<Void> pagar(@PathVariable Long id) {
+        pedidoService.confirmarPago(id);
+        return ResponseEntity.ok().build();
+    }
 }

@@ -14,4 +14,8 @@ public interface PedidoService {
     public List<Pedido> listarTodos();
 
     public void cancelarPedido(Long id);
+
+    public void entregarPedido(Long id);
+
+    public void confirmarPago(Long id);
 }

@@ -116,4 +116,28 @@ public class PedidoServiceImpl implements PedidoService {
         pedido.setCancelado(true);
         pedidoRepository.save(pedido);
     }
+
+    public void entregarPedido(Long id) {
+        Pedido pedido = pedidoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pedido no encontrado"));
+
+        if (pedido.isCancelado()) {
+            throw new RuntimeException("No se puede entregar un pedido cancelado");
+        }
+
+        pedido.setEntregado(true);
+        pedidoRepository.save(pedido);
+    }
+
+    public void confirmarPago(Long id) {
+        Pedido pedido = pedidoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pedido no encontrado"));
+
+        if (pedido.isCancelado()) {
+            throw new RuntimeException("No se puede pagar un pedido cancelado");
+        }
+
+        pedido.setPagado(true);
+        pedidoRepository.save(pedido);
+    }
 }

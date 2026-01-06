@@ -59,6 +59,8 @@ export interface Pedido {
   detalles: DetallePedido[];
   observaciones?: string;
   cancelado: boolean;
+  entregado: boolean;
+  pagado: boolean;
 }
 
 // --- TIPOS DE PEDIDO (Escritura / Crear) ---

@@ -16,5 +16,13 @@ export const pedidoService = {
 
   cancelar: async (id: number): Promise<void> => {
     await api.delete(`/pedidos/${id}`);
+  },
+
+  entregar: async (id: number): Promise<void> => {
+    await api.post(`/pedidos/${id}/entregar`);
+  },
+
+  pagar: async (id: number): Promise<void> => {
+    await api.post(`/pedidos/${id}/pagar`);
   }
 };

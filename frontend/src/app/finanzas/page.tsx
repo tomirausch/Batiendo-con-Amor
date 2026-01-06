@@ -83,6 +83,7 @@ export default function FinanzasPage() {
     // 1. Filtrar Listas Crudas
     const pedidosEnRango = pedidos.filter(p => {
       if (p.cancelado) return false;
+      if (!p.pagado) return false;
       const f = new Date(p.fechaEntrega);
       // Ajuste de zona horaria simple para comparar fechas
       return f >= desde && f <= hasta;

@@ -8,6 +8,7 @@ import { Pedido } from '@/types';
 export default function Dashboard() {
   const [stats, setStats] = useState({
     pendientes: 0,
+    pagosPendientes: 0,
     ingresosMes: 0,
     mejorCliente: '-'
   });
@@ -28,6 +29,8 @@ export default function Dashboard() {
         // --- 1. PEDIDOS PENDIENTES (No cancelados y fecha >= hoy) ---
         const pendientes = pedidos.filter(p => {
           if (p.cancelado) return false; // Ignorar cancelados
+          if (p.pagado) return false; // Ignorar pagados
+          if (p.entregado) return false; // Ignorar entregados
 
           const fechaEntrega = new Date(p.fechaEntrega);
           // Ajustamos la zona horaria sumando el offset si es necesario, 
@@ -37,9 +40,13 @@ export default function Dashboard() {
           return fechaEntrega.getTime() >= hoy.getTime();
         }).length;
 
+        // --- 4. PAGOS PENDIENTES (No cancelados y !pagado) ---
+        const pagosPendientes = pedidos.filter(p => !p.cancelado && !p.pagado).length;
+
         // --- 2. INGRESOS DEL MES (No cancelados) ---
         const ingresos = pedidos.reduce((acc, p) => {
           if (p.cancelado) return acc; // Ignorar cancelados
+          if (!p.pagado) return acc; // Ignorar no pagados
 
           const fecha = new Date(p.fechaEntrega);
           if (fecha.getMonth() === mesActual && fecha.getFullYear() === anioActual) {
@@ -53,6 +60,7 @@ export default function Dashboard() {
 
         pedidos.forEach(p => {
           if (p.cancelado) return; // Ignorar cancelados
+          if (!p.pagado) return; // Ignorar no pagados
 
           const nombreCompleto = `${p.cliente.nombre} ${p.cliente.apellido}`;
           if (!gastosPorCliente[nombreCompleto]) {
@@ -74,6 +82,7 @@ export default function Dashboard() {
 
         setStats({
           pendientes,
+          pagosPendientes,
           ingresosMes: ingresos,
           mejorCliente: mejorClienteNombre
         });
@@ -137,13 +146,21 @@ export default function Dashboard() {
         {/* Tarjeta 4: Resumen (CONECTADO AL BACKEND) */}
         <div className="bg-linear-to-br from-purple-50 to-pink-50 p-6 rounded-xl shadow border border-purple-100 md:col-span-2 lg:col-span-3">
           <h3 className="text-lg font-bold text-gray-700 mb-4">📊 Estado del Negocio</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
 
             {/* Pedidos Pendientes */}
             <div className="bg-white p-4 rounded shadow-sm text-center">
               <p className="text-gray-500 text-xs uppercase font-bold">Pedidos Pendientes</p>
               <p className="text-3xl font-bold text-orange-500">
                 {loading ? '...' : stats.pendientes}
+              </p>
+            </div>
+
+            {/* Pagos Pendientes */}
+            <div className="bg-white p-4 rounded shadow-sm text-center">
+              <p className="text-gray-500 text-xs uppercase font-bold">Pagos Pendientes</p>
+              <p className="text-3xl font-bold text-blue-500">
+                {loading ? '...' : stats.pagosPendientes}
               </p>
             </div>
 
