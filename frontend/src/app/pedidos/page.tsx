@@ -11,6 +11,7 @@ export default function PedidosPage() {
   const [pedidos, setPedidos] = useState<Pedido[]>([]);
   const [loading, setLoading] = useState(true);
   const [pedidoSeleccionado, setPedidoSeleccionado] = useState<Pedido | null>(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
   // ESTADO PARA EL ORDENAMIENTO
   const [sortConfig, setSortConfig] = useState<{ key: string; direction: 'asc' | 'desc' }>({ key: 'entrega', direction: 'desc' });
@@ -60,7 +61,16 @@ export default function PedidosPage() {
     setSortConfig({ key, direction });
   };
 
-  const pedidosOrdenados = [...pedidos].sort((a, b) => {
+  const pedidosFiltrados = pedidos.filter(p => {
+    if (!searchTerm) return true;
+    const lowerSearch = searchTerm.toLowerCase();
+    const nombreCliente = `${p.cliente.nombre} ${p.cliente.apellido}`.toLowerCase();
+    const productos = p.detalles.map(d => d.producto.nombre.toLowerCase()).join(' ');
+
+    return nombreCliente.includes(lowerSearch) || productos.includes(lowerSearch);
+  });
+
+  const pedidosOrdenados = [...pedidosFiltrados].sort((a, b) => {
     const { key, direction } = sortConfig;
     let comparison = 0;
 
@@ -105,6 +115,17 @@ export default function PedidosPage() {
         >
           + Nuevo Pedido
         </Link>
+      </div>
+
+      {/* BARRA DE BÚSQUEDA */}
+      <div className="mb-4">
+        <input
+          type="text"
+          placeholder="🔍 Buscar por cliente o producto..."
+          className="w-full md:w-1/3 p-2 border border-pink-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
       </div>
 
       <PedidoModal
