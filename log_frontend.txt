@@ -1,0 +1,50 @@
+
+> hotel-app@0.1.0 dev
+> next dev
+
+[32m✔[0m [33mConsole Ninja[0m extension is connected to [33mNext.js[0m, see [36mhttps://tinyurl.com/2vt8jxzw[0m
+⚠ Console Ninja Turbopack support is a PRO feature, [33mcurrently available to community users while in preview[0m
+   ▲ Next.js 16.0.3 (Turbopack)
+   - Local:         http://localhost:3000
+   - Network:       http://192.168.1.106:3000
+
+ ✓ Starting...
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+ ✓ Ready in 2.1s
+ HEAD / 200 in 3.5s (compile: 3.3s, render: 202ms)
+ GET / 200 in 194ms (compile: 18ms, render: 176ms)
+ ✓ Compiled in 353ms
+ ✓ Compiled in 265ms
+ ✓ Compiled in 244ms
+ ✓ Compiled in 217ms
+ ✓ Compiled in 120ms
+ ✓ Compiled in 466ms
+ ✓ Compiled in 9ms
+ ✓ Compiled in 15ms
+ ✓ Compiled in 18ms
+ ✓ Compiled in 19ms
+ ✓ Compiled in 10ms
+ ✓ Compiled in 117ms
+ ✓ Compiled in 138ms
+ ✓ Compiled in 31ms
+ ✓ Compiled in 34ms
+ ✓ Compiled in 17ms
+ ✓ Compiled in 146ms
+ ✓ Compiled in 158ms
+ GET /dar-alta-huesped 200 in 171ms (compile: 113ms, render: 58ms)
+ ✓ Compiled in 162ms
+ ✓ Compiled in 577ms
+ ✓ Compiled in 336ms
+ ✓ Compiled in 493ms
+ ✓ Compiled in 119ms
+ ✓ Compiled in 164ms
+ ✓ Compiled in 138ms
+ ✓ Compiled in 204ms
+ ✓ Compiled in 100ms
+ ✓ Compiled in 346ms
+ ✓ Compiled in 266ms
+ ✓ Compiled in 318ms
+ ✓ Compiled in 218ms
+ ✓ Compiled in 360ms
+ ✓ Compiled in 166ms
+ ✓ Compiled in 150ms
