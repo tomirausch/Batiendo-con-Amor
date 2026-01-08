@@ -16,15 +16,13 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [INFO] Copying 0 resource from src\main\resources to target\classes
 [INFO] 
 [INFO] --- compiler:3.14.1:compile (default-compile) @ backend ---
-[INFO] Recompiling the module because of changed source code.
-[INFO] Compiling 39 source files with javac [debug parameters release 21] to target\classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO] 
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ backend ---
 [INFO] skip non existing resourceDirectory C:\Users\Windows\Desktop\Batiendo con Amor\backend\src\test\resources
 [INFO] 
 [INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ backend ---
-[INFO] Recompiling the module because of changed dependency.
-[INFO] Compiling 1 source file with javac [debug parameters release 21] to target\test-classes
+[INFO] Nothing to compile - all classes are up to date.
 [INFO] 
 [INFO] <<< spring-boot:4.0.0:run (default-cli) < test-compile @ backend <<<
 [INFO] 
@@ -41,21 +39,21 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 
  :: Spring Boot ::                (v4.0.0)
 
-2026-01-08T12:05:16.592-03:00  INFO 7868 --- [backend] [           main] c.b.backend.BackendApplication           : Starting BackendApplication using Java 24.0.2 with PID 7868 (C:\Users\Windows\Desktop\Batiendo con Amor\backend\target\classes started by Windows in C:\Users\Windows\Desktop\Batiendo con Amor\backend)
-2026-01-08T12:05:16.605-03:00  INFO 7868 --- [backend] [           main] c.b.backend.BackendApplication           : No active profile set, falling back to 1 default profile: "default"
-2026-01-08T12:05:18.727-03:00  INFO 7868 --- [backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-01-08T12:05:18.888-03:00  INFO 7868 --- [backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 143 ms. Found 6 JPA repository interfaces.
-2026-01-08T12:05:21.557-03:00  INFO 7868 --- [backend] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
-2026-01-08T12:05:21.628-03:00  INFO 7868 --- [backend] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-01-08T12:05:21.629-03:00  INFO 7868 --- [backend] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.14]
-2026-01-08T12:05:21.969-03:00  INFO 7868 --- [backend] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 5170 ms
-2026-01-08T12:05:22.705-03:00  INFO 7868 --- [backend] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-01-08T12:05:22.924-03:00  INFO 7868 --- [backend] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 7.1.8.Final
-2026-01-08T12:05:24.661-03:00  INFO 7868 --- [backend] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-01-08T12:05:25.089-03:00  INFO 7868 --- [backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-01-08T12:05:26.071-03:00  INFO 7868 --- [backend] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7598d675
-2026-01-08T12:05:26.076-03:00  INFO 7868 --- [backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-01-08T12:05:26.358-03:00  INFO 7868 --- [backend] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2026-01-08T19:57:07.961-03:00  INFO 13972 --- [backend] [           main] c.b.backend.BackendApplication           : Starting BackendApplication using Java 24.0.2 with PID 13972 (C:\Users\Windows\Desktop\Batiendo con Amor\backend\target\classes started by Windows in C:\Users\Windows\Desktop\Batiendo con Amor\backend)
+2026-01-08T19:57:07.965-03:00  INFO 13972 --- [backend] [           main] c.b.backend.BackendApplication           : No active profile set, falling back to 1 default profile: "default"
+2026-01-08T19:57:08.821-03:00  INFO 13972 --- [backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-01-08T19:57:08.905-03:00  INFO 13972 --- [backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 74 ms. Found 6 JPA repository interfaces.
+2026-01-08T19:57:09.567-03:00  INFO 13972 --- [backend] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-01-08T19:57:09.581-03:00  INFO 13972 --- [backend] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-01-08T19:57:09.581-03:00  INFO 13972 --- [backend] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.14]
+2026-01-08T19:57:09.629-03:00  INFO 13972 --- [backend] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1579 ms
+2026-01-08T19:57:09.767-03:00  INFO 13972 --- [backend] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-01-08T19:57:09.806-03:00  INFO 13972 --- [backend] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 7.1.8.Final
+2026-01-08T19:57:10.250-03:00  INFO 13972 --- [backend] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-01-08T19:57:10.286-03:00  INFO 13972 --- [backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-01-08T19:57:10.487-03:00  INFO 13972 --- [backend] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@31f1b268
+2026-01-08T19:57:10.489-03:00  INFO 13972 --- [backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-01-08T19:57:10.566-03:00  INFO 13972 --- [backend] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [jdbc:mysql://localhost:3306/batiendo_db?serverTimezone=America/Argentina/Buenos_Aires&useSSL=false&allowPublicKeyRetrieval=true]
 	Database driver: MySQL Connector/J
 	Database dialect: MySQLDialect
@@ -67,23 +65,20 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 	Pool: DatasourceConnectionProviderImpl
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-01-08T12:05:28.188-03:00  INFO 7868 --- [backend] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-Hibernate: 
-    alter table pedidos 
-       add column precio_adicional decimal(38,2)
-2026-01-08T12:05:28.546-03:00  INFO 7868 --- [backend] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-01-08T12:05:28.669-03:00  INFO 7868 --- [backend] [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-01-08T12:05:29.086-03:00  WARN 7868 --- [backend] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-01-08T12:05:29.507-03:00  INFO 7868 --- [backend] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
-2026-01-08T12:05:29.512-03:00  INFO 7868 --- [backend] [           main] c.b.backend.BackendApplication           : Started BackendApplication in 14.025 seconds (process running for 15.069)
-2026-01-08T12:05:29.728-03:00  INFO 7868 --- [backend] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-01-08T12:05:29.728-03:00  INFO 7868 --- [backend] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-01-08T12:05:29.730-03:00  INFO 7868 --- [backend] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-01-08T19:57:11.630-03:00  INFO 13972 --- [backend] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-01-08T19:57:11.787-03:00  INFO 13972 --- [backend] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-01-08T19:57:11.866-03:00  INFO 13972 --- [backend] [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-01-08T19:57:12.199-03:00  WARN 13972 --- [backend] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-01-08T19:57:12.551-03:00  INFO 13972 --- [backend] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-01-08T19:57:12.560-03:00  INFO 13972 --- [backend] [           main] c.b.backend.BackendApplication           : Started BackendApplication in 5.226 seconds (process running for 5.763)
 Hibernate: 
     select
         count(*) 
     from
         clientes c1_0
+2026-01-08T19:57:14.224-03:00  INFO 13972 --- [backend] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-01-08T19:57:14.224-03:00  INFO 13972 --- [backend] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-01-08T19:57:14.225-03:00  INFO 13972 --- [backend] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
 Hibernate: 
     select
         p1_0.id_pedido,
@@ -320,55 +315,625 @@ Hibernate:
         detalle_opciones o1_0 
     where
         o1_0.id_detalle=?
-2026-01-08T12:42:49.506-03:00  WARN 7868 --- [backend] [l-1:housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=37m23s388ms41µs700ns).
+Hibernate: 
+    select
+        d1_0.id_pedido,
+        d1_0.id_detalle,
+        d1_0.cantidad,
+        d1_0.precio_base_historico,
+        d1_0.id_producto,
+        d1_0.subtotal 
+    from
+        detalle_pedidos d1_0 
+    where
+        d1_0.id_pedido=?
+Hibernate: 
+    select
+        o1_0.id_detalle,
+        o1_0.id_detalle_opcion,
+        o1_0.id_opcion_atributo,
+        o1_0.precio_extra_historico 
+    from
+        detalle_opciones o1_0 
+    where
+        o1_0.id_detalle=?
+Hibernate: 
+    select
+        p1_0.id_pedido,
+        p1_0.cancelado,
+        p1_0.id_cliente,
+        p1_0.entregado,
+        p1_0.fecha_emitido,
+        p1_0.fecha_entrega,
+        p1_0.observaciones,
+        p1_0.pagado,
+        p1_0.precio_adicional,
+        p1_0.total 
+    from
+        pedidos p1_0
+Hibernate: 
+    select
+        c1_0.id_cliente,
+        c1_0.activo,
+        c1_0.apellido,
+        c1_0.direccion,
+        c1_0.nombre,
+        c1_0.telefono 
+    from
+        clientes c1_0 
+    where
+        c1_0.id_cliente=?
+Hibernate: 
+    select
+        d1_0.id_pedido,
+        d1_0.id_detalle,
+        d1_0.cantidad,
+        d1_0.precio_base_historico,
+        d1_0.id_producto,
+        d1_0.subtotal 
+    from
+        detalle_pedidos d1_0 
+    where
+        d1_0.id_pedido=?
+Hibernate: 
+    select
+        o1_0.id_detalle,
+        o1_0.id_detalle_opcion,
+        o1_0.id_opcion_atributo,
+        o1_0.precio_extra_historico 
+    from
+        detalle_opciones o1_0 
+    where
+        o1_0.id_detalle=?
 Hibernate: 
     select
         oa1_0.id_opcion,
-        oa1_0.id_atributo,
+        a1_0.id_atributo,
+        a1_0.nombre,
         oa1_0.nombre,
         oa1_0.precio_extra 
     from
-        opcion_atributos oa1_0
-Hibernate: 
-    select
-        a1_0.id_atributo,
-        a1_0.nombre 
-    from
+        opcion_atributos oa1_0 
+    left join
         atributos a1_0 
+            on a1_0.id_atributo=oa1_0.id_atributo 
     where
-        a1_0.id_atributo=?
-Hibernate: 
-    select
-        a1_0.id_atributo,
-        a1_0.nombre 
-    from
-        atributos a1_0 
-    where
-        a1_0.id_atributo=?
+        oa1_0.id_opcion=?
 Hibernate: 
     select
         oa1_0.id_opcion,
-        oa1_0.id_atributo,
+        a1_0.id_atributo,
+        a1_0.nombre,
         oa1_0.nombre,
         oa1_0.precio_extra 
     from
-        opcion_atributos oa1_0
+        opcion_atributos oa1_0 
+    left join
+        atributos a1_0 
+            on a1_0.id_atributo=oa1_0.id_atributo 
+    where
+        oa1_0.id_opcion=?
+Hibernate: 
+    select
+        p1_0.id_producto,
+        p1_0.activo,
+        av1_0.id_producto,
+        av1_1.id_atributo,
+        av1_1.nombre,
+        p1_0.nombre,
+        p1_0.precio_base,
+        p1_0.unidad 
+    from
+        productos p1_0 
+    left join
+        producto_atributos_validos av1_0 
+            on p1_0.id_producto=av1_0.id_producto 
+    left join
+        atributos av1_1 
+            on av1_1.id_atributo=av1_0.id_atributo 
+    where
+        p1_0.id_producto=?
+Hibernate: 
+    select
+        c1_0.id_cliente,
+        c1_0.activo,
+        c1_0.apellido,
+        c1_0.direccion,
+        c1_0.nombre,
+        c1_0.telefono 
+    from
+        clientes c1_0 
+    where
+        c1_0.id_cliente=?
+Hibernate: 
+    select
+        d1_0.id_pedido,
+        d1_0.id_detalle,
+        d1_0.cantidad,
+        d1_0.precio_base_historico,
+        d1_0.id_producto,
+        d1_0.subtotal 
+    from
+        detalle_pedidos d1_0 
+    where
+        d1_0.id_pedido=?
+Hibernate: 
+    select
+        o1_0.id_detalle,
+        o1_0.id_detalle_opcion,
+        o1_0.id_opcion_atributo,
+        o1_0.precio_extra_historico 
+    from
+        detalle_opciones o1_0 
+    where
+        o1_0.id_detalle=?
+Hibernate: 
+    select
+        p1_0.id_producto,
+        p1_0.activo,
+        av1_0.id_producto,
+        av1_1.id_atributo,
+        av1_1.nombre,
+        p1_0.nombre,
+        p1_0.precio_base,
+        p1_0.unidad 
+    from
+        productos p1_0 
+    left join
+        producto_atributos_validos av1_0 
+            on p1_0.id_producto=av1_0.id_producto 
+    left join
+        atributos av1_1 
+            on av1_1.id_atributo=av1_0.id_atributo 
+    where
+        p1_0.id_producto=?
+Hibernate: 
+    select
+        c1_0.id_cliente,
+        c1_0.activo,
+        c1_0.apellido,
+        c1_0.direccion,
+        c1_0.nombre,
+        c1_0.telefono 
+    from
+        clientes c1_0 
+    where
+        c1_0.id_cliente=?
+Hibernate: 
+    select
+        d1_0.id_pedido,
+        d1_0.id_detalle,
+        d1_0.cantidad,
+        d1_0.precio_base_historico,
+        d1_0.id_producto,
+        d1_0.subtotal 
+    from
+        detalle_pedidos d1_0 
+    where
+        d1_0.id_pedido=?
+Hibernate: 
+    select
+        o1_0.id_detalle,
+        o1_0.id_detalle_opcion,
+        o1_0.id_opcion_atributo,
+        o1_0.precio_extra_historico 
+    from
+        detalle_opciones o1_0 
+    where
+        o1_0.id_detalle=?
+Hibernate: 
+    select
+        o1_0.id_detalle,
+        o1_0.id_detalle_opcion,
+        o1_0.id_opcion_atributo,
+        o1_0.precio_extra_historico 
+    from
+        detalle_opciones o1_0 
+    where
+        o1_0.id_detalle=?
+Hibernate: 
+    select
+        p1_0.id_producto,
+        p1_0.activo,
+        av1_0.id_producto,
+        av1_1.id_atributo,
+        av1_1.nombre,
+        p1_0.nombre,
+        p1_0.precio_base,
+        p1_0.unidad 
+    from
+        productos p1_0 
+    left join
+        producto_atributos_validos av1_0 
+            on p1_0.id_producto=av1_0.id_producto 
+    left join
+        atributos av1_1 
+            on av1_1.id_atributo=av1_0.id_atributo 
+    where
+        p1_0.id_producto=?
+Hibernate: 
+    select
+        d1_0.id_pedido,
+        d1_0.id_detalle,
+        d1_0.cantidad,
+        d1_0.precio_base_historico,
+        d1_0.id_producto,
+        d1_0.subtotal 
+    from
+        detalle_pedidos d1_0 
+    where
+        d1_0.id_pedido=?
+Hibernate: 
+    select
+        o1_0.id_detalle,
+        o1_0.id_detalle_opcion,
+        o1_0.id_opcion_atributo,
+        o1_0.precio_extra_historico 
+    from
+        detalle_opciones o1_0 
+    where
+        o1_0.id_detalle=?
+Hibernate: 
+    select
+        d1_0.id_pedido,
+        d1_0.id_detalle,
+        d1_0.cantidad,
+        d1_0.precio_base_historico,
+        d1_0.id_producto,
+        d1_0.subtotal 
+    from
+        detalle_pedidos d1_0 
+    where
+        d1_0.id_pedido=?
+Hibernate: 
+    select
+        o1_0.id_detalle,
+        o1_0.id_detalle_opcion,
+        o1_0.id_opcion_atributo,
+        o1_0.precio_extra_historico 
+    from
+        detalle_opciones o1_0 
+    where
+        o1_0.id_detalle=?
+Hibernate: 
+    select
+        p1_0.id_pedido,
+        p1_0.cancelado,
+        p1_0.id_cliente,
+        p1_0.entregado,
+        p1_0.fecha_emitido,
+        p1_0.fecha_entrega,
+        p1_0.observaciones,
+        p1_0.pagado,
+        p1_0.precio_adicional,
+        p1_0.total 
+    from
+        pedidos p1_0
+Hibernate: 
+    select
+        c1_0.id_cliente,
+        c1_0.activo,
+        c1_0.apellido,
+        c1_0.direccion,
+        c1_0.nombre,
+        c1_0.telefono 
+    from
+        clientes c1_0 
+    where
+        c1_0.id_cliente=?
+Hibernate: 
+    select
+        d1_0.id_pedido,
+        d1_0.id_detalle,
+        d1_0.cantidad,
+        d1_0.precio_base_historico,
+        d1_0.id_producto,
+        d1_0.subtotal 
+    from
+        detalle_pedidos d1_0 
+    where
+        d1_0.id_pedido=?
+Hibernate: 
+    select
+        o1_0.id_detalle,
+        o1_0.id_detalle_opcion,
+        o1_0.id_opcion_atributo,
+        o1_0.precio_extra_historico 
+    from
+        detalle_opciones o1_0 
+    where
+        o1_0.id_detalle=?
+Hibernate: 
+    select
+        oa1_0.id_opcion,
+        a1_0.id_atributo,
+        a1_0.nombre,
+        oa1_0.nombre,
+        oa1_0.precio_extra 
+    from
+        opcion_atributos oa1_0 
+    left join
+        atributos a1_0 
+            on a1_0.id_atributo=oa1_0.id_atributo 
+    where
+        oa1_0.id_opcion=?
+Hibernate: 
+    select
+        oa1_0.id_opcion,
+        a1_0.id_atributo,
+        a1_0.nombre,
+        oa1_0.nombre,
+        oa1_0.precio_extra 
+    from
+        opcion_atributos oa1_0 
+    left join
+        atributos a1_0 
+            on a1_0.id_atributo=oa1_0.id_atributo 
+    where
+        oa1_0.id_opcion=?
+Hibernate: 
+    select
+        p1_0.id_producto,
+        p1_0.activo,
+        av1_0.id_producto,
+        av1_1.id_atributo,
+        av1_1.nombre,
+        p1_0.nombre,
+        p1_0.precio_base,
+        p1_0.unidad 
+    from
+        productos p1_0 
+    left join
+        producto_atributos_validos av1_0 
+            on p1_0.id_producto=av1_0.id_producto 
+    left join
+        atributos av1_1 
+            on av1_1.id_atributo=av1_0.id_atributo 
+    where
+        p1_0.id_producto=?
+Hibernate: 
+    select
+        c1_0.id_cliente,
+        c1_0.activo,
+        c1_0.apellido,
+        c1_0.direccion,
+        c1_0.nombre,
+        c1_0.telefono 
+    from
+        clientes c1_0 
+    where
+        c1_0.id_cliente=?
+Hibernate: 
+    select
+        d1_0.id_pedido,
+        d1_0.id_detalle,
+        d1_0.cantidad,
+        d1_0.precio_base_historico,
+        d1_0.id_producto,
+        d1_0.subtotal 
+    from
+        detalle_pedidos d1_0 
+    where
+        d1_0.id_pedido=?
+Hibernate: 
+    select
+        o1_0.id_detalle,
+        o1_0.id_detalle_opcion,
+        o1_0.id_opcion_atributo,
+        o1_0.precio_extra_historico 
+    from
+        detalle_opciones o1_0 
+    where
+        o1_0.id_detalle=?
+Hibernate: 
+    select
+        p1_0.id_producto,
+        p1_0.activo,
+        av1_0.id_producto,
+        av1_1.id_atributo,
+        av1_1.nombre,
+        p1_0.nombre,
+        p1_0.precio_base,
+        p1_0.unidad 
+    from
+        productos p1_0 
+    left join
+        producto_atributos_validos av1_0 
+            on p1_0.id_producto=av1_0.id_producto 
+    left join
+        atributos av1_1 
+            on av1_1.id_atributo=av1_0.id_atributo 
+    where
+        p1_0.id_producto=?
+Hibernate: 
+    select
+        c1_0.id_cliente,
+        c1_0.activo,
+        c1_0.apellido,
+        c1_0.direccion,
+        c1_0.nombre,
+        c1_0.telefono 
+    from
+        clientes c1_0 
+    where
+        c1_0.id_cliente=?
+Hibernate: 
+    select
+        d1_0.id_pedido,
+        d1_0.id_detalle,
+        d1_0.cantidad,
+        d1_0.precio_base_historico,
+        d1_0.id_producto,
+        d1_0.subtotal 
+    from
+        detalle_pedidos d1_0 
+    where
+        d1_0.id_pedido=?
+Hibernate: 
+    select
+        o1_0.id_detalle,
+        o1_0.id_detalle_opcion,
+        o1_0.id_opcion_atributo,
+        o1_0.precio_extra_historico 
+    from
+        detalle_opciones o1_0 
+    where
+        o1_0.id_detalle=?
+Hibernate: 
+    select
+        o1_0.id_detalle,
+        o1_0.id_detalle_opcion,
+        o1_0.id_opcion_atributo,
+        o1_0.precio_extra_historico 
+    from
+        detalle_opciones o1_0 
+    where
+        o1_0.id_detalle=?
+Hibernate: 
+    select
+        p1_0.id_producto,
+        p1_0.activo,
+        av1_0.id_producto,
+        av1_1.id_atributo,
+        av1_1.nombre,
+        p1_0.nombre,
+        p1_0.precio_base,
+        p1_0.unidad 
+    from
+        productos p1_0 
+    left join
+        producto_atributos_validos av1_0 
+            on p1_0.id_producto=av1_0.id_producto 
+    left join
+        atributos av1_1 
+            on av1_1.id_atributo=av1_0.id_atributo 
+    where
+        p1_0.id_producto=?
+Hibernate: 
+    select
+        d1_0.id_pedido,
+        d1_0.id_detalle,
+        d1_0.cantidad,
+        d1_0.precio_base_historico,
+        d1_0.id_producto,
+        d1_0.subtotal 
+    from
+        detalle_pedidos d1_0 
+    where
+        d1_0.id_pedido=?
+Hibernate: 
+    select
+        o1_0.id_detalle,
+        o1_0.id_detalle_opcion,
+        o1_0.id_opcion_atributo,
+        o1_0.precio_extra_historico 
+    from
+        detalle_opciones o1_0 
+    where
+        o1_0.id_detalle=?
+Hibernate: 
+    select
+        d1_0.id_pedido,
+        d1_0.id_detalle,
+        d1_0.cantidad,
+        d1_0.precio_base_historico,
+        d1_0.id_producto,
+        d1_0.subtotal 
+    from
+        detalle_pedidos d1_0 
+    where
+        d1_0.id_pedido=?
+Hibernate: 
+    select
+        o1_0.id_detalle,
+        o1_0.id_detalle_opcion,
+        o1_0.id_opcion_atributo,
+        o1_0.precio_extra_historico 
+    from
+        detalle_opciones o1_0 
+    where
+        o1_0.id_detalle=?
 Hibernate: 
     select
         a1_0.id_atributo,
         a1_0.nombre 
     from
-        atributos a1_0 
-    where
-        a1_0.id_atributo=?
+        atributos a1_0
+Hibernate: 
+    select
+        p1_0.id_producto,
+        p1_0.activo,
+        p1_0.nombre,
+        p1_0.precio_base,
+        p1_0.unidad 
+    from
+        productos p1_0
 Hibernate: 
     select
         a1_0.id_atributo,
         a1_0.nombre 
     from
-        atributos a1_0 
+        atributos a1_0
+Hibernate: 
+    select
+        av1_0.id_producto,
+        av1_1.id_atributo,
+        av1_1.nombre 
+    from
+        producto_atributos_validos av1_0 
+    join
+        atributos av1_1 
+            on av1_1.id_atributo=av1_0.id_atributo 
     where
-        a1_0.id_atributo=?
+        av1_0.id_producto=?
+Hibernate: 
+    select
+        av1_0.id_producto,
+        av1_1.id_atributo,
+        av1_1.nombre 
+    from
+        producto_atributos_validos av1_0 
+    join
+        atributos av1_1 
+            on av1_1.id_atributo=av1_0.id_atributo 
+    where
+        av1_0.id_producto=?
+Hibernate: 
+    select
+        av1_0.id_producto,
+        av1_1.id_atributo,
+        av1_1.nombre 
+    from
+        producto_atributos_validos av1_0 
+    join
+        atributos av1_1 
+            on av1_1.id_atributo=av1_0.id_atributo 
+    where
+        av1_0.id_producto=?
+Hibernate: 
+    select
+        av1_0.id_producto,
+        av1_1.id_atributo,
+        av1_1.nombre 
+    from
+        producto_atributos_validos av1_0 
+    join
+        atributos av1_1 
+            on av1_1.id_atributo=av1_0.id_atributo 
+    where
+        av1_0.id_producto=?
+Hibernate: 
+    select
+        av1_0.id_producto,
+        av1_1.id_atributo,
+        av1_1.nombre 
+    from
+        producto_atributos_validos av1_0 
+    join
+        atributos av1_1 
+            on av1_1.id_atributo=av1_0.id_atributo 
+    where
+        av1_0.id_producto=?
 Hibernate: 
     select
         p1_0.id_producto,
@@ -440,6 +1005,522 @@ Hibernate:
         av1_0.id_producto=?
 Hibernate: 
     select
+        p1_0.id_pedido,
+        p1_0.cancelado,
+        p1_0.id_cliente,
+        p1_0.entregado,
+        p1_0.fecha_emitido,
+        p1_0.fecha_entrega,
+        p1_0.observaciones,
+        p1_0.pagado,
+        p1_0.precio_adicional,
+        p1_0.total 
+    from
+        pedidos p1_0
+Hibernate: 
+    select
+        c1_0.id_cliente,
+        c1_0.activo,
+        c1_0.apellido,
+        c1_0.direccion,
+        c1_0.nombre,
+        c1_0.telefono 
+    from
+        clientes c1_0 
+    where
+        c1_0.id_cliente=?
+Hibernate: 
+    select
+        d1_0.id_pedido,
+        d1_0.id_detalle,
+        d1_0.cantidad,
+        d1_0.precio_base_historico,
+        d1_0.id_producto,
+        d1_0.subtotal 
+    from
+        detalle_pedidos d1_0 
+    where
+        d1_0.id_pedido=?
+Hibernate: 
+    select
+        o1_0.id_detalle,
+        o1_0.id_detalle_opcion,
+        o1_0.id_opcion_atributo,
+        o1_0.precio_extra_historico 
+    from
+        detalle_opciones o1_0 
+    where
+        o1_0.id_detalle=?
+Hibernate: 
+    select
+        oa1_0.id_opcion,
+        a1_0.id_atributo,
+        a1_0.nombre,
+        oa1_0.nombre,
+        oa1_0.precio_extra 
+    from
+        opcion_atributos oa1_0 
+    left join
+        atributos a1_0 
+            on a1_0.id_atributo=oa1_0.id_atributo 
+    where
+        oa1_0.id_opcion=?
+Hibernate: 
+    select
+        oa1_0.id_opcion,
+        a1_0.id_atributo,
+        a1_0.nombre,
+        oa1_0.nombre,
+        oa1_0.precio_extra 
+    from
+        opcion_atributos oa1_0 
+    left join
+        atributos a1_0 
+            on a1_0.id_atributo=oa1_0.id_atributo 
+    where
+        oa1_0.id_opcion=?
+Hibernate: 
+    select
+        p1_0.id_producto,
+        p1_0.activo,
+        av1_0.id_producto,
+        av1_1.id_atributo,
+        av1_1.nombre,
+        p1_0.nombre,
+        p1_0.precio_base,
+        p1_0.unidad 
+    from
+        productos p1_0 
+    left join
+        producto_atributos_validos av1_0 
+            on p1_0.id_producto=av1_0.id_producto 
+    left join
+        atributos av1_1 
+            on av1_1.id_atributo=av1_0.id_atributo 
+    where
+        p1_0.id_producto=?
+Hibernate: 
+    select
+        c1_0.id_cliente,
+        c1_0.activo,
+        c1_0.apellido,
+        c1_0.direccion,
+        c1_0.nombre,
+        c1_0.telefono 
+    from
+        clientes c1_0 
+    where
+        c1_0.id_cliente=?
+Hibernate: 
+    select
+        d1_0.id_pedido,
+        d1_0.id_detalle,
+        d1_0.cantidad,
+        d1_0.precio_base_historico,
+        d1_0.id_producto,
+        d1_0.subtotal 
+    from
+        detalle_pedidos d1_0 
+    where
+        d1_0.id_pedido=?
+Hibernate: 
+    select
+        o1_0.id_detalle,
+        o1_0.id_detalle_opcion,
+        o1_0.id_opcion_atributo,
+        o1_0.precio_extra_historico 
+    from
+        detalle_opciones o1_0 
+    where
+        o1_0.id_detalle=?
+Hibernate: 
+    select
+        p1_0.id_producto,
+        p1_0.activo,
+        av1_0.id_producto,
+        av1_1.id_atributo,
+        av1_1.nombre,
+        p1_0.nombre,
+        p1_0.precio_base,
+        p1_0.unidad 
+    from
+        productos p1_0 
+    left join
+        producto_atributos_validos av1_0 
+            on p1_0.id_producto=av1_0.id_producto 
+    left join
+        atributos av1_1 
+            on av1_1.id_atributo=av1_0.id_atributo 
+    where
+        p1_0.id_producto=?
+Hibernate: 
+    select
+        c1_0.id_cliente,
+        c1_0.activo,
+        c1_0.apellido,
+        c1_0.direccion,
+        c1_0.nombre,
+        c1_0.telefono 
+    from
+        clientes c1_0 
+    where
+        c1_0.id_cliente=?
+Hibernate: 
+    select
+        d1_0.id_pedido,
+        d1_0.id_detalle,
+        d1_0.cantidad,
+        d1_0.precio_base_historico,
+        d1_0.id_producto,
+        d1_0.subtotal 
+    from
+        detalle_pedidos d1_0 
+    where
+        d1_0.id_pedido=?
+Hibernate: 
+    select
+        o1_0.id_detalle,
+        o1_0.id_detalle_opcion,
+        o1_0.id_opcion_atributo,
+        o1_0.precio_extra_historico 
+    from
+        detalle_opciones o1_0 
+    where
+        o1_0.id_detalle=?
+Hibernate: 
+    select
+        o1_0.id_detalle,
+        o1_0.id_detalle_opcion,
+        o1_0.id_opcion_atributo,
+        o1_0.precio_extra_historico 
+    from
+        detalle_opciones o1_0 
+    where
+        o1_0.id_detalle=?
+Hibernate: 
+    select
+        p1_0.id_producto,
+        p1_0.activo,
+        av1_0.id_producto,
+        av1_1.id_atributo,
+        av1_1.nombre,
+        p1_0.nombre,
+        p1_0.precio_base,
+        p1_0.unidad 
+    from
+        productos p1_0 
+    left join
+        producto_atributos_validos av1_0 
+            on p1_0.id_producto=av1_0.id_producto 
+    left join
+        atributos av1_1 
+            on av1_1.id_atributo=av1_0.id_atributo 
+    where
+        p1_0.id_producto=?
+Hibernate: 
+    select
+        d1_0.id_pedido,
+        d1_0.id_detalle,
+        d1_0.cantidad,
+        d1_0.precio_base_historico,
+        d1_0.id_producto,
+        d1_0.subtotal 
+    from
+        detalle_pedidos d1_0 
+    where
+        d1_0.id_pedido=?
+Hibernate: 
+    select
+        o1_0.id_detalle,
+        o1_0.id_detalle_opcion,
+        o1_0.id_opcion_atributo,
+        o1_0.precio_extra_historico 
+    from
+        detalle_opciones o1_0 
+    where
+        o1_0.id_detalle=?
+Hibernate: 
+    select
+        d1_0.id_pedido,
+        d1_0.id_detalle,
+        d1_0.cantidad,
+        d1_0.precio_base_historico,
+        d1_0.id_producto,
+        d1_0.subtotal 
+    from
+        detalle_pedidos d1_0 
+    where
+        d1_0.id_pedido=?
+Hibernate: 
+    select
+        o1_0.id_detalle,
+        o1_0.id_detalle_opcion,
+        o1_0.id_opcion_atributo,
+        o1_0.precio_extra_historico 
+    from
+        detalle_opciones o1_0 
+    where
+        o1_0.id_detalle=?
+Hibernate: 
+    select
+        p1_0.id_pedido,
+        p1_0.cancelado,
+        p1_0.id_cliente,
+        p1_0.entregado,
+        p1_0.fecha_emitido,
+        p1_0.fecha_entrega,
+        p1_0.observaciones,
+        p1_0.pagado,
+        p1_0.precio_adicional,
+        p1_0.total 
+    from
+        pedidos p1_0
+Hibernate: 
+    select
+        c1_0.id_cliente,
+        c1_0.activo,
+        c1_0.apellido,
+        c1_0.direccion,
+        c1_0.nombre,
+        c1_0.telefono 
+    from
+        clientes c1_0 
+    where
+        c1_0.id_cliente=?
+Hibernate: 
+    select
+        d1_0.id_pedido,
+        d1_0.id_detalle,
+        d1_0.cantidad,
+        d1_0.precio_base_historico,
+        d1_0.id_producto,
+        d1_0.subtotal 
+    from
+        detalle_pedidos d1_0 
+    where
+        d1_0.id_pedido=?
+Hibernate: 
+    select
+        o1_0.id_detalle,
+        o1_0.id_detalle_opcion,
+        o1_0.id_opcion_atributo,
+        o1_0.precio_extra_historico 
+    from
+        detalle_opciones o1_0 
+    where
+        o1_0.id_detalle=?
+Hibernate: 
+    select
+        oa1_0.id_opcion,
+        a1_0.id_atributo,
+        a1_0.nombre,
+        oa1_0.nombre,
+        oa1_0.precio_extra 
+    from
+        opcion_atributos oa1_0 
+    left join
+        atributos a1_0 
+            on a1_0.id_atributo=oa1_0.id_atributo 
+    where
+        oa1_0.id_opcion=?
+Hibernate: 
+    select
+        oa1_0.id_opcion,
+        a1_0.id_atributo,
+        a1_0.nombre,
+        oa1_0.nombre,
+        oa1_0.precio_extra 
+    from
+        opcion_atributos oa1_0 
+    left join
+        atributos a1_0 
+            on a1_0.id_atributo=oa1_0.id_atributo 
+    where
+        oa1_0.id_opcion=?
+Hibernate: 
+    select
+        p1_0.id_producto,
+        p1_0.activo,
+        av1_0.id_producto,
+        av1_1.id_atributo,
+        av1_1.nombre,
+        p1_0.nombre,
+        p1_0.precio_base,
+        p1_0.unidad 
+    from
+        productos p1_0 
+    left join
+        producto_atributos_validos av1_0 
+            on p1_0.id_producto=av1_0.id_producto 
+    left join
+        atributos av1_1 
+            on av1_1.id_atributo=av1_0.id_atributo 
+    where
+        p1_0.id_producto=?
+Hibernate: 
+    select
+        c1_0.id_cliente,
+        c1_0.activo,
+        c1_0.apellido,
+        c1_0.direccion,
+        c1_0.nombre,
+        c1_0.telefono 
+    from
+        clientes c1_0 
+    where
+        c1_0.id_cliente=?
+Hibernate: 
+    select
+        d1_0.id_pedido,
+        d1_0.id_detalle,
+        d1_0.cantidad,
+        d1_0.precio_base_historico,
+        d1_0.id_producto,
+        d1_0.subtotal 
+    from
+        detalle_pedidos d1_0 
+    where
+        d1_0.id_pedido=?
+Hibernate: 
+    select
+        o1_0.id_detalle,
+        o1_0.id_detalle_opcion,
+        o1_0.id_opcion_atributo,
+        o1_0.precio_extra_historico 
+    from
+        detalle_opciones o1_0 
+    where
+        o1_0.id_detalle=?
+Hibernate: 
+    select
+        p1_0.id_producto,
+        p1_0.activo,
+        av1_0.id_producto,
+        av1_1.id_atributo,
+        av1_1.nombre,
+        p1_0.nombre,
+        p1_0.precio_base,
+        p1_0.unidad 
+    from
+        productos p1_0 
+    left join
+        producto_atributos_validos av1_0 
+            on p1_0.id_producto=av1_0.id_producto 
+    left join
+        atributos av1_1 
+            on av1_1.id_atributo=av1_0.id_atributo 
+    where
+        p1_0.id_producto=?
+Hibernate: 
+    select
+        c1_0.id_cliente,
+        c1_0.activo,
+        c1_0.apellido,
+        c1_0.direccion,
+        c1_0.nombre,
+        c1_0.telefono 
+    from
+        clientes c1_0 
+    where
+        c1_0.id_cliente=?
+Hibernate: 
+    select
+        d1_0.id_pedido,
+        d1_0.id_detalle,
+        d1_0.cantidad,
+        d1_0.precio_base_historico,
+        d1_0.id_producto,
+        d1_0.subtotal 
+    from
+        detalle_pedidos d1_0 
+    where
+        d1_0.id_pedido=?
+Hibernate: 
+    select
+        o1_0.id_detalle,
+        o1_0.id_detalle_opcion,
+        o1_0.id_opcion_atributo,
+        o1_0.precio_extra_historico 
+    from
+        detalle_opciones o1_0 
+    where
+        o1_0.id_detalle=?
+Hibernate: 
+    select
+        o1_0.id_detalle,
+        o1_0.id_detalle_opcion,
+        o1_0.id_opcion_atributo,
+        o1_0.precio_extra_historico 
+    from
+        detalle_opciones o1_0 
+    where
+        o1_0.id_detalle=?
+Hibernate: 
+    select
+        p1_0.id_producto,
+        p1_0.activo,
+        av1_0.id_producto,
+        av1_1.id_atributo,
+        av1_1.nombre,
+        p1_0.nombre,
+        p1_0.precio_base,
+        p1_0.unidad 
+    from
+        productos p1_0 
+    left join
+        producto_atributos_validos av1_0 
+            on p1_0.id_producto=av1_0.id_producto 
+    left join
+        atributos av1_1 
+            on av1_1.id_atributo=av1_0.id_atributo 
+    where
+        p1_0.id_producto=?
+Hibernate: 
+    select
+        d1_0.id_pedido,
+        d1_0.id_detalle,
+        d1_0.cantidad,
+        d1_0.precio_base_historico,
+        d1_0.id_producto,
+        d1_0.subtotal 
+    from
+        detalle_pedidos d1_0 
+    where
+        d1_0.id_pedido=?
+Hibernate: 
+    select
+        o1_0.id_detalle,
+        o1_0.id_detalle_opcion,
+        o1_0.id_opcion_atributo,
+        o1_0.precio_extra_historico 
+    from
+        detalle_opciones o1_0 
+    where
+        o1_0.id_detalle=?
+Hibernate: 
+    select
+        d1_0.id_pedido,
+        d1_0.id_detalle,
+        d1_0.cantidad,
+        d1_0.precio_base_historico,
+        d1_0.id_producto,
+        d1_0.subtotal 
+    from
+        detalle_pedidos d1_0 
+    where
+        d1_0.id_pedido=?
+Hibernate: 
+    select
+        o1_0.id_detalle,
+        o1_0.id_detalle_opcion,
+        o1_0.id_opcion_atributo,
+        o1_0.precio_extra_historico 
+    from
+        detalle_opciones o1_0 
+    where
+        o1_0.id_detalle=?
+Hibernate: 
+    select
         p1_0.id_producto,
         p1_0.activo,
         p1_0.nombre,
@@ -461,6 +1542,14 @@ Hibernate:
         av1_0.id_producto=?
 Hibernate: 
     select
+        oa1_0.id_opcion,
+        oa1_0.id_atributo,
+        oa1_0.nombre,
+        oa1_0.precio_extra 
+    from
+        opcion_atributos oa1_0
+Hibernate: 
+    select
         av1_0.id_producto,
         av1_1.id_atributo,
         av1_1.nombre 
@@ -483,6 +1572,115 @@ Hibernate:
             on av1_1.id_atributo=av1_0.id_atributo 
     where
         av1_0.id_producto=?
+Hibernate: 
+    select
+        av1_0.id_producto,
+        av1_1.id_atributo,
+        av1_1.nombre 
+    from
+        producto_atributos_validos av1_0 
+    join
+        atributos av1_1 
+            on av1_1.id_atributo=av1_0.id_atributo 
+    where
+        av1_0.id_producto=?
+Hibernate: 
+    select
+        a1_0.id_atributo,
+        a1_0.nombre 
+    from
+        atributos a1_0 
+    where
+        a1_0.id_atributo=?
+Hibernate: 
+    select
+        av1_0.id_producto,
+        av1_1.id_atributo,
+        av1_1.nombre 
+    from
+        producto_atributos_validos av1_0 
+    join
+        atributos av1_1 
+            on av1_1.id_atributo=av1_0.id_atributo 
+    where
+        av1_0.id_producto=?
+Hibernate: 
+    select
+        a1_0.id_atributo,
+        a1_0.nombre 
+    from
+        atributos a1_0 
+    where
+        a1_0.id_atributo=?
+Hibernate: 
+    select
+        p1_0.id_producto,
+        p1_0.activo,
+        p1_0.nombre,
+        p1_0.precio_base,
+        p1_0.unidad 
+    from
+        productos p1_0
+Hibernate: 
+    select
+        av1_0.id_producto,
+        av1_1.id_atributo,
+        av1_1.nombre 
+    from
+        producto_atributos_validos av1_0 
+    join
+        atributos av1_1 
+            on av1_1.id_atributo=av1_0.id_atributo 
+    where
+        av1_0.id_producto=?
+Hibernate: 
+    select
+        oa1_0.id_opcion,
+        oa1_0.id_atributo,
+        oa1_0.nombre,
+        oa1_0.precio_extra 
+    from
+        opcion_atributos oa1_0
+Hibernate: 
+    select
+        av1_0.id_producto,
+        av1_1.id_atributo,
+        av1_1.nombre 
+    from
+        producto_atributos_validos av1_0 
+    join
+        atributos av1_1 
+            on av1_1.id_atributo=av1_0.id_atributo 
+    where
+        av1_0.id_producto=?
+Hibernate: 
+    select
+        a1_0.id_atributo,
+        a1_0.nombre 
+    from
+        atributos a1_0 
+    where
+        a1_0.id_atributo=?
+Hibernate: 
+    select
+        av1_0.id_producto,
+        av1_1.id_atributo,
+        av1_1.nombre 
+    from
+        producto_atributos_validos av1_0 
+    join
+        atributos av1_1 
+            on av1_1.id_atributo=av1_0.id_atributo 
+    where
+        av1_0.id_producto=?
+Hibernate: 
+    select
+        a1_0.id_atributo,
+        a1_0.nombre 
+    from
+        atributos a1_0 
+    where
+        a1_0.id_atributo=?
 Hibernate: 
     select
         av1_0.id_producto,
@@ -531,854 +1729,3 @@ Hibernate:
         clientes c1_0 
     where
         c1_0.activo=true
-Hibernate: 
-    select
-        c1_0.id_cliente,
-        c1_0.activo,
-        c1_0.apellido,
-        c1_0.direccion,
-        c1_0.nombre,
-        c1_0.telefono 
-    from
-        clientes c1_0 
-    where
-        c1_0.id_cliente=?
-Hibernate: 
-    select
-        p1_0.id_producto,
-        p1_0.activo,
-        av1_0.id_producto,
-        av1_1.id_atributo,
-        av1_1.nombre,
-        p1_0.nombre,
-        p1_0.precio_base,
-        p1_0.unidad 
-    from
-        productos p1_0 
-    left join
-        producto_atributos_validos av1_0 
-            on p1_0.id_producto=av1_0.id_producto 
-    left join
-        atributos av1_1 
-            on av1_1.id_atributo=av1_0.id_atributo 
-    where
-        p1_0.id_producto=?
-Hibernate: 
-    insert 
-    into
-        pedidos
-        (cancelado, id_cliente, entregado, fecha_emitido, fecha_entrega, observaciones, pagado, precio_adicional, total) 
-    values
-        (?, ?, ?, ?, ?, ?, ?, ?, ?)
-Hibernate: 
-    insert 
-    into
-        detalle_pedidos
-        (cantidad, id_pedido, precio_base_historico, id_producto, subtotal) 
-    values
-        (?, ?, ?, ?, ?)
-Hibernate: 
-    select
-        p1_0.id_pedido,
-        p1_0.cancelado,
-        p1_0.id_cliente,
-        p1_0.entregado,
-        p1_0.fecha_emitido,
-        p1_0.fecha_entrega,
-        p1_0.observaciones,
-        p1_0.pagado,
-        p1_0.precio_adicional,
-        p1_0.total 
-    from
-        pedidos p1_0
-Hibernate: 
-    select
-        c1_0.id_cliente,
-        c1_0.activo,
-        c1_0.apellido,
-        c1_0.direccion,
-        c1_0.nombre,
-        c1_0.telefono 
-    from
-        clientes c1_0 
-    where
-        c1_0.id_cliente=?
-Hibernate: 
-    select
-        d1_0.id_pedido,
-        d1_0.id_detalle,
-        d1_0.cantidad,
-        d1_0.precio_base_historico,
-        d1_0.id_producto,
-        d1_0.subtotal 
-    from
-        detalle_pedidos d1_0 
-    where
-        d1_0.id_pedido=?
-Hibernate: 
-    select
-        o1_0.id_detalle,
-        o1_0.id_detalle_opcion,
-        o1_0.id_opcion_atributo,
-        o1_0.precio_extra_historico 
-    from
-        detalle_opciones o1_0 
-    where
-        o1_0.id_detalle=?
-Hibernate: 
-    select
-        oa1_0.id_opcion,
-        a1_0.id_atributo,
-        a1_0.nombre,
-        oa1_0.nombre,
-        oa1_0.precio_extra 
-    from
-        opcion_atributos oa1_0 
-    left join
-        atributos a1_0 
-            on a1_0.id_atributo=oa1_0.id_atributo 
-    where
-        oa1_0.id_opcion=?
-Hibernate: 
-    select
-        oa1_0.id_opcion,
-        a1_0.id_atributo,
-        a1_0.nombre,
-        oa1_0.nombre,
-        oa1_0.precio_extra 
-    from
-        opcion_atributos oa1_0 
-    left join
-        atributos a1_0 
-            on a1_0.id_atributo=oa1_0.id_atributo 
-    where
-        oa1_0.id_opcion=?
-Hibernate: 
-    select
-        p1_0.id_producto,
-        p1_0.activo,
-        av1_0.id_producto,
-        av1_1.id_atributo,
-        av1_1.nombre,
-        p1_0.nombre,
-        p1_0.precio_base,
-        p1_0.unidad 
-    from
-        productos p1_0 
-    left join
-        producto_atributos_validos av1_0 
-            on p1_0.id_producto=av1_0.id_producto 
-    left join
-        atributos av1_1 
-            on av1_1.id_atributo=av1_0.id_atributo 
-    where
-        p1_0.id_producto=?
-Hibernate: 
-    select
-        c1_0.id_cliente,
-        c1_0.activo,
-        c1_0.apellido,
-        c1_0.direccion,
-        c1_0.nombre,
-        c1_0.telefono 
-    from
-        clientes c1_0 
-    where
-        c1_0.id_cliente=?
-Hibernate: 
-    select
-        d1_0.id_pedido,
-        d1_0.id_detalle,
-        d1_0.cantidad,
-        d1_0.precio_base_historico,
-        d1_0.id_producto,
-        d1_0.subtotal 
-    from
-        detalle_pedidos d1_0 
-    where
-        d1_0.id_pedido=?
-Hibernate: 
-    select
-        o1_0.id_detalle,
-        o1_0.id_detalle_opcion,
-        o1_0.id_opcion_atributo,
-        o1_0.precio_extra_historico 
-    from
-        detalle_opciones o1_0 
-    where
-        o1_0.id_detalle=?
-Hibernate: 
-    select
-        p1_0.id_producto,
-        p1_0.activo,
-        av1_0.id_producto,
-        av1_1.id_atributo,
-        av1_1.nombre,
-        p1_0.nombre,
-        p1_0.precio_base,
-        p1_0.unidad 
-    from
-        productos p1_0 
-    left join
-        producto_atributos_validos av1_0 
-            on p1_0.id_producto=av1_0.id_producto 
-    left join
-        atributos av1_1 
-            on av1_1.id_atributo=av1_0.id_atributo 
-    where
-        p1_0.id_producto=?
-Hibernate: 
-    select
-        c1_0.id_cliente,
-        c1_0.activo,
-        c1_0.apellido,
-        c1_0.direccion,
-        c1_0.nombre,
-        c1_0.telefono 
-    from
-        clientes c1_0 
-    where
-        c1_0.id_cliente=?
-Hibernate: 
-    select
-        d1_0.id_pedido,
-        d1_0.id_detalle,
-        d1_0.cantidad,
-        d1_0.precio_base_historico,
-        d1_0.id_producto,
-        d1_0.subtotal 
-    from
-        detalle_pedidos d1_0 
-    where
-        d1_0.id_pedido=?
-Hibernate: 
-    select
-        o1_0.id_detalle,
-        o1_0.id_detalle_opcion,
-        o1_0.id_opcion_atributo,
-        o1_0.precio_extra_historico 
-    from
-        detalle_opciones o1_0 
-    where
-        o1_0.id_detalle=?
-Hibernate: 
-    select
-        o1_0.id_detalle,
-        o1_0.id_detalle_opcion,
-        o1_0.id_opcion_atributo,
-        o1_0.precio_extra_historico 
-    from
-        detalle_opciones o1_0 
-    where
-        o1_0.id_detalle=?
-Hibernate: 
-    select
-        p1_0.id_producto,
-        p1_0.activo,
-        av1_0.id_producto,
-        av1_1.id_atributo,
-        av1_1.nombre,
-        p1_0.nombre,
-        p1_0.precio_base,
-        p1_0.unidad 
-    from
-        productos p1_0 
-    left join
-        producto_atributos_validos av1_0 
-            on p1_0.id_producto=av1_0.id_producto 
-    left join
-        atributos av1_1 
-            on av1_1.id_atributo=av1_0.id_atributo 
-    where
-        p1_0.id_producto=?
-Hibernate: 
-    select
-        d1_0.id_pedido,
-        d1_0.id_detalle,
-        d1_0.cantidad,
-        d1_0.precio_base_historico,
-        d1_0.id_producto,
-        d1_0.subtotal 
-    from
-        detalle_pedidos d1_0 
-    where
-        d1_0.id_pedido=?
-Hibernate: 
-    select
-        o1_0.id_detalle,
-        o1_0.id_detalle_opcion,
-        o1_0.id_opcion_atributo,
-        o1_0.precio_extra_historico 
-    from
-        detalle_opciones o1_0 
-    where
-        o1_0.id_detalle=?
-Hibernate: 
-    select
-        d1_0.id_pedido,
-        d1_0.id_detalle,
-        d1_0.cantidad,
-        d1_0.precio_base_historico,
-        d1_0.id_producto,
-        d1_0.subtotal 
-    from
-        detalle_pedidos d1_0 
-    where
-        d1_0.id_pedido=?
-Hibernate: 
-    select
-        o1_0.id_detalle,
-        o1_0.id_detalle_opcion,
-        o1_0.id_opcion_atributo,
-        o1_0.precio_extra_historico 
-    from
-        detalle_opciones o1_0 
-    where
-        o1_0.id_detalle=?
-Hibernate: 
-    select
-        p1_0.id_pedido,
-        p1_0.cancelado,
-        p1_0.id_cliente,
-        p1_0.entregado,
-        p1_0.fecha_emitido,
-        p1_0.fecha_entrega,
-        p1_0.observaciones,
-        p1_0.pagado,
-        p1_0.precio_adicional,
-        p1_0.total 
-    from
-        pedidos p1_0
-Hibernate: 
-    select
-        c1_0.id_cliente,
-        c1_0.activo,
-        c1_0.apellido,
-        c1_0.direccion,
-        c1_0.nombre,
-        c1_0.telefono 
-    from
-        clientes c1_0 
-    where
-        c1_0.id_cliente=?
-Hibernate: 
-    select
-        d1_0.id_pedido,
-        d1_0.id_detalle,
-        d1_0.cantidad,
-        d1_0.precio_base_historico,
-        d1_0.id_producto,
-        d1_0.subtotal 
-    from
-        detalle_pedidos d1_0 
-    where
-        d1_0.id_pedido=?
-Hibernate: 
-    select
-        o1_0.id_detalle,
-        o1_0.id_detalle_opcion,
-        o1_0.id_opcion_atributo,
-        o1_0.precio_extra_historico 
-    from
-        detalle_opciones o1_0 
-    where
-        o1_0.id_detalle=?
-Hibernate: 
-    select
-        oa1_0.id_opcion,
-        a1_0.id_atributo,
-        a1_0.nombre,
-        oa1_0.nombre,
-        oa1_0.precio_extra 
-    from
-        opcion_atributos oa1_0 
-    left join
-        atributos a1_0 
-            on a1_0.id_atributo=oa1_0.id_atributo 
-    where
-        oa1_0.id_opcion=?
-Hibernate: 
-    select
-        oa1_0.id_opcion,
-        a1_0.id_atributo,
-        a1_0.nombre,
-        oa1_0.nombre,
-        oa1_0.precio_extra 
-    from
-        opcion_atributos oa1_0 
-    left join
-        atributos a1_0 
-            on a1_0.id_atributo=oa1_0.id_atributo 
-    where
-        oa1_0.id_opcion=?
-Hibernate: 
-    select
-        p1_0.id_producto,
-        p1_0.activo,
-        av1_0.id_producto,
-        av1_1.id_atributo,
-        av1_1.nombre,
-        p1_0.nombre,
-        p1_0.precio_base,
-        p1_0.unidad 
-    from
-        productos p1_0 
-    left join
-        producto_atributos_validos av1_0 
-            on p1_0.id_producto=av1_0.id_producto 
-    left join
-        atributos av1_1 
-            on av1_1.id_atributo=av1_0.id_atributo 
-    where
-        p1_0.id_producto=?
-Hibernate: 
-    select
-        c1_0.id_cliente,
-        c1_0.activo,
-        c1_0.apellido,
-        c1_0.direccion,
-        c1_0.nombre,
-        c1_0.telefono 
-    from
-        clientes c1_0 
-    where
-        c1_0.id_cliente=?
-Hibernate: 
-    select
-        d1_0.id_pedido,
-        d1_0.id_detalle,
-        d1_0.cantidad,
-        d1_0.precio_base_historico,
-        d1_0.id_producto,
-        d1_0.subtotal 
-    from
-        detalle_pedidos d1_0 
-    where
-        d1_0.id_pedido=?
-Hibernate: 
-    select
-        o1_0.id_detalle,
-        o1_0.id_detalle_opcion,
-        o1_0.id_opcion_atributo,
-        o1_0.precio_extra_historico 
-    from
-        detalle_opciones o1_0 
-    where
-        o1_0.id_detalle=?
-Hibernate: 
-    select
-        p1_0.id_producto,
-        p1_0.activo,
-        av1_0.id_producto,
-        av1_1.id_atributo,
-        av1_1.nombre,
-        p1_0.nombre,
-        p1_0.precio_base,
-        p1_0.unidad 
-    from
-        productos p1_0 
-    left join
-        producto_atributos_validos av1_0 
-            on p1_0.id_producto=av1_0.id_producto 
-    left join
-        atributos av1_1 
-            on av1_1.id_atributo=av1_0.id_atributo 
-    where
-        p1_0.id_producto=?
-Hibernate: 
-    select
-        c1_0.id_cliente,
-        c1_0.activo,
-        c1_0.apellido,
-        c1_0.direccion,
-        c1_0.nombre,
-        c1_0.telefono 
-    from
-        clientes c1_0 
-    where
-        c1_0.id_cliente=?
-Hibernate: 
-    select
-        d1_0.id_pedido,
-        d1_0.id_detalle,
-        d1_0.cantidad,
-        d1_0.precio_base_historico,
-        d1_0.id_producto,
-        d1_0.subtotal 
-    from
-        detalle_pedidos d1_0 
-    where
-        d1_0.id_pedido=?
-Hibernate: 
-    select
-        o1_0.id_detalle,
-        o1_0.id_detalle_opcion,
-        o1_0.id_opcion_atributo,
-        o1_0.precio_extra_historico 
-    from
-        detalle_opciones o1_0 
-    where
-        o1_0.id_detalle=?
-Hibernate: 
-    select
-        o1_0.id_detalle,
-        o1_0.id_detalle_opcion,
-        o1_0.id_opcion_atributo,
-        o1_0.precio_extra_historico 
-    from
-        detalle_opciones o1_0 
-    where
-        o1_0.id_detalle=?
-Hibernate: 
-    select
-        p1_0.id_producto,
-        p1_0.activo,
-        av1_0.id_producto,
-        av1_1.id_atributo,
-        av1_1.nombre,
-        p1_0.nombre,
-        p1_0.precio_base,
-        p1_0.unidad 
-    from
-        productos p1_0 
-    left join
-        producto_atributos_validos av1_0 
-            on p1_0.id_producto=av1_0.id_producto 
-    left join
-        atributos av1_1 
-            on av1_1.id_atributo=av1_0.id_atributo 
-    where
-        p1_0.id_producto=?
-Hibernate: 
-    select
-        d1_0.id_pedido,
-        d1_0.id_detalle,
-        d1_0.cantidad,
-        d1_0.precio_base_historico,
-        d1_0.id_producto,
-        d1_0.subtotal 
-    from
-        detalle_pedidos d1_0 
-    where
-        d1_0.id_pedido=?
-Hibernate: 
-    select
-        o1_0.id_detalle,
-        o1_0.id_detalle_opcion,
-        o1_0.id_opcion_atributo,
-        o1_0.precio_extra_historico 
-    from
-        detalle_opciones o1_0 
-    where
-        o1_0.id_detalle=?
-Hibernate: 
-    select
-        d1_0.id_pedido,
-        d1_0.id_detalle,
-        d1_0.cantidad,
-        d1_0.precio_base_historico,
-        d1_0.id_producto,
-        d1_0.subtotal 
-    from
-        detalle_pedidos d1_0 
-    where
-        d1_0.id_pedido=?
-Hibernate: 
-    select
-        o1_0.id_detalle,
-        o1_0.id_detalle_opcion,
-        o1_0.id_opcion_atributo,
-        o1_0.precio_extra_historico 
-    from
-        detalle_opciones o1_0 
-    where
-        o1_0.id_detalle=?
-Hibernate: 
-    select
-        p1_0.id_pedido,
-        p1_0.cancelado,
-        p1_0.id_cliente,
-        p1_0.entregado,
-        p1_0.fecha_emitido,
-        p1_0.fecha_entrega,
-        p1_0.observaciones,
-        p1_0.pagado,
-        p1_0.precio_adicional,
-        p1_0.total 
-    from
-        pedidos p1_0 
-    where
-        p1_0.id_pedido=?
-Hibernate: 
-    update
-        pedidos 
-    set
-        cancelado=?,
-        id_cliente=?,
-        entregado=?,
-        fecha_emitido=?,
-        fecha_entrega=?,
-        observaciones=?,
-        pagado=?,
-        precio_adicional=?,
-        total=? 
-    where
-        id_pedido=?
-Hibernate: 
-    select
-        p1_0.id_pedido,
-        p1_0.cancelado,
-        p1_0.id_cliente,
-        p1_0.entregado,
-        p1_0.fecha_emitido,
-        p1_0.fecha_entrega,
-        p1_0.observaciones,
-        p1_0.pagado,
-        p1_0.precio_adicional,
-        p1_0.total 
-    from
-        pedidos p1_0
-Hibernate: 
-    select
-        c1_0.id_cliente,
-        c1_0.activo,
-        c1_0.apellido,
-        c1_0.direccion,
-        c1_0.nombre,
-        c1_0.telefono 
-    from
-        clientes c1_0 
-    where
-        c1_0.id_cliente=?
-Hibernate: 
-    select
-        d1_0.id_pedido,
-        d1_0.id_detalle,
-        d1_0.cantidad,
-        d1_0.precio_base_historico,
-        d1_0.id_producto,
-        d1_0.subtotal 
-    from
-        detalle_pedidos d1_0 
-    where
-        d1_0.id_pedido=?
-Hibernate: 
-    select
-        o1_0.id_detalle,
-        o1_0.id_detalle_opcion,
-        o1_0.id_opcion_atributo,
-        o1_0.precio_extra_historico 
-    from
-        detalle_opciones o1_0 
-    where
-        o1_0.id_detalle=?
-Hibernate: 
-    select
-        oa1_0.id_opcion,
-        a1_0.id_atributo,
-        a1_0.nombre,
-        oa1_0.nombre,
-        oa1_0.precio_extra 
-    from
-        opcion_atributos oa1_0 
-    left join
-        atributos a1_0 
-            on a1_0.id_atributo=oa1_0.id_atributo 
-    where
-        oa1_0.id_opcion=?
-Hibernate: 
-    select
-        oa1_0.id_opcion,
-        a1_0.id_atributo,
-        a1_0.nombre,
-        oa1_0.nombre,
-        oa1_0.precio_extra 
-    from
-        opcion_atributos oa1_0 
-    left join
-        atributos a1_0 
-            on a1_0.id_atributo=oa1_0.id_atributo 
-    where
-        oa1_0.id_opcion=?
-Hibernate: 
-    select
-        p1_0.id_producto,
-        p1_0.activo,
-        av1_0.id_producto,
-        av1_1.id_atributo,
-        av1_1.nombre,
-        p1_0.nombre,
-        p1_0.precio_base,
-        p1_0.unidad 
-    from
-        productos p1_0 
-    left join
-        producto_atributos_validos av1_0 
-            on p1_0.id_producto=av1_0.id_producto 
-    left join
-        atributos av1_1 
-            on av1_1.id_atributo=av1_0.id_atributo 
-    where
-        p1_0.id_producto=?
-Hibernate: 
-    select
-        c1_0.id_cliente,
-        c1_0.activo,
-        c1_0.apellido,
-        c1_0.direccion,
-        c1_0.nombre,
-        c1_0.telefono 
-    from
-        clientes c1_0 
-    where
-        c1_0.id_cliente=?
-Hibernate: 
-    select
-        d1_0.id_pedido,
-        d1_0.id_detalle,
-        d1_0.cantidad,
-        d1_0.precio_base_historico,
-        d1_0.id_producto,
-        d1_0.subtotal 
-    from
-        detalle_pedidos d1_0 
-    where
-        d1_0.id_pedido=?
-Hibernate: 
-    select
-        o1_0.id_detalle,
-        o1_0.id_detalle_opcion,
-        o1_0.id_opcion_atributo,
-        o1_0.precio_extra_historico 
-    from
-        detalle_opciones o1_0 
-    where
-        o1_0.id_detalle=?
-Hibernate: 
-    select
-        p1_0.id_producto,
-        p1_0.activo,
-        av1_0.id_producto,
-        av1_1.id_atributo,
-        av1_1.nombre,
-        p1_0.nombre,
-        p1_0.precio_base,
-        p1_0.unidad 
-    from
-        productos p1_0 
-    left join
-        producto_atributos_validos av1_0 
-            on p1_0.id_producto=av1_0.id_producto 
-    left join
-        atributos av1_1 
-            on av1_1.id_atributo=av1_0.id_atributo 
-    where
-        p1_0.id_producto=?
-Hibernate: 
-    select
-        c1_0.id_cliente,
-        c1_0.activo,
-        c1_0.apellido,
-        c1_0.direccion,
-        c1_0.nombre,
-        c1_0.telefono 
-    from
-        clientes c1_0 
-    where
-        c1_0.id_cliente=?
-Hibernate: 
-    select
-        d1_0.id_pedido,
-        d1_0.id_detalle,
-        d1_0.cantidad,
-        d1_0.precio_base_historico,
-        d1_0.id_producto,
-        d1_0.subtotal 
-    from
-        detalle_pedidos d1_0 
-    where
-        d1_0.id_pedido=?
-Hibernate: 
-    select
-        o1_0.id_detalle,
-        o1_0.id_detalle_opcion,
-        o1_0.id_opcion_atributo,
-        o1_0.precio_extra_historico 
-    from
-        detalle_opciones o1_0 
-    where
-        o1_0.id_detalle=?
-Hibernate: 
-    select
-        o1_0.id_detalle,
-        o1_0.id_detalle_opcion,
-        o1_0.id_opcion_atributo,
-        o1_0.precio_extra_historico 
-    from
-        detalle_opciones o1_0 
-    where
-        o1_0.id_detalle=?
-Hibernate: 
-    select
-        p1_0.id_producto,
-        p1_0.activo,
-        av1_0.id_producto,
-        av1_1.id_atributo,
-        av1_1.nombre,
-        p1_0.nombre,
-        p1_0.precio_base,
-        p1_0.unidad 
-    from
-        productos p1_0 
-    left join
-        producto_atributos_validos av1_0 
-            on p1_0.id_producto=av1_0.id_producto 
-    left join
-        atributos av1_1 
-            on av1_1.id_atributo=av1_0.id_atributo 
-    where
-        p1_0.id_producto=?
-Hibernate: 
-    select
-        d1_0.id_pedido,
-        d1_0.id_detalle,
-        d1_0.cantidad,
-        d1_0.precio_base_historico,
-        d1_0.id_producto,
-        d1_0.subtotal 
-    from
-        detalle_pedidos d1_0 
-    where
-        d1_0.id_pedido=?
-Hibernate: 
-    select
-        o1_0.id_detalle,
-        o1_0.id_detalle_opcion,
-        o1_0.id_opcion_atributo,
-        o1_0.precio_extra_historico 
-    from
-        detalle_opciones o1_0 
-    where
-        o1_0.id_detalle=?
-Hibernate: 
-    select
-        d1_0.id_pedido,
-        d1_0.id_detalle,
-        d1_0.cantidad,
-        d1_0.precio_base_historico,
-        d1_0.id_producto,
-        d1_0.subtotal 
-    from
-        detalle_pedidos d1_0 
-    where
-        d1_0.id_pedido=?
-Hibernate: 
-    select
-        o1_0.id_detalle,
-        o1_0.id_detalle_opcion,
-        o1_0.id_opcion_atributo,
-        o1_0.precio_extra_historico 
-    from
-        detalle_opciones o1_0 
-    where
-        o1_0.id_detalle=?

@@ -18,13 +18,12 @@
    - Network:       http://192.168.1.122:3000
 
  ✓ Starting...
- ✓ Ready in 7.5s
- ○ Compiling /pedidos/nuevo ...
+ ✓ Ready in 1731ms
+ ○ Compiling / ...
 [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
- GET /pedidos/nuevo 200 in 23.3s (compile: 22.3s, render: 1024ms)
- GET /pedidos/nuevo 200 in 2.5s (compile: 1654ms, render: 809ms)
- HEAD / 200 in 765ms (compile: 663ms, render: 102ms)
- GET / 200 in 339ms (compile: 11ms, render: 328ms)
- GET /pedidos/nuevo 200 in 1917ms (compile: 258ms, render: 1659ms)
- GET /pedidos/nuevo 200 in 503ms (compile: 173ms, render: 330ms)
- GET /pedidos 200 in 1940ms (compile: 1806ms, render: 134ms)
+ HEAD / 200 in 6.6s (compile: 6.4s, render: 221ms)
+ GET / 200 in 185ms (compile: 12ms, render: 173ms)
+ GET /pedidos 200 in 785ms (compile: 748ms, render: 36ms)
+ GET /productos 200 in 443ms (compile: 413ms, render: 30ms)
+ GET /pedidos 200 in 39ms (compile: 5ms, render: 34ms)
+ GET /pedidos/nuevo 200 in 825ms (compile: 780ms, render: 45ms)

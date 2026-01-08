@@ -212,12 +212,12 @@ export default function NuevoPedidoPage() {
                   <div className="mt-2 flex items-center gap-2">
                     <label className="text-sm">Cantidad:</label>
                     <input
-                      type="number" min="1"
+                      type="number" min="0" step="0.1"
                       className="w-16 border p-1 rounded"
                       value={item.cantidad}
                       onChange={e => {
-                        const nuevaCant = parseInt(e.target.value);
-                        setCarrito(carrito.map(i => i.tempId === item.tempId ? { ...i, cantidad: nuevaCant } : i));
+                        const nuevaCant = parseFloat(e.target.value);
+                        setCarrito(carrito.map(i => i.tempId === item.tempId ? { ...i, cantidad: isNaN(nuevaCant) ? 0 : nuevaCant } : i));
                       }}
                     />
                   </div>

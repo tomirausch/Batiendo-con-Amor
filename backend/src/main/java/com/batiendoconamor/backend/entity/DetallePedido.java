@@ -18,7 +18,7 @@ public class DetallePedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idDetalle;
 
-    private Integer cantidad;
+    private BigDecimal cantidad;
     private BigDecimal subtotal;
 
     // SNAPSHOT DE PRECIO: Guardamos cuánto costaba el producto base ese día

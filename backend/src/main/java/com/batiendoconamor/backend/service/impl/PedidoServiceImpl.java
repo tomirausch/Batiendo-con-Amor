@@ -70,7 +70,7 @@ public class PedidoServiceImpl implements PedidoService {
 
             // B. Calcular subtotal inicial (Precio Base * Cantidad)
             BigDecimal subtotalDetalle = producto.getPrecioBase()
-                    .multiply(new BigDecimal(detDto.getCantidad()));
+                    .multiply(detDto.getCantidad());
 
             // C. Procesar Opciones (Rellenos, etc.)
             if (detDto.getIdsOpciones() != null) {
@@ -89,7 +89,7 @@ public class PedidoServiceImpl implements PedidoService {
                     // Sumar al subtotal del detalle: (Precio Extra * Cantidad de productos)
                     // Ej: Si son 2 tortas, el extra de "frutillas" se cobra 2 veces
                     BigDecimal costoExtraTotal = opcion.getPrecioExtra()
-                            .multiply(new BigDecimal(detDto.getCantidad()));
+                            .multiply(detDto.getCantidad());
 
                     subtotalDetalle = subtotalDetalle.add(costoExtraTotal);
                 }
