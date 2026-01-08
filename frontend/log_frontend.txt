@@ -4,6 +4,7 @@
 
 [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
 [32m✔[0m [33mConsole Ninja[0m extension is connected to [33mNext.js[0m, see [36mhttps://tinyurl.com/2vt8jxzw[0m
+⚠ Console Ninja Turbopack support is a PRO feature, [33mcurrently available to community users while in preview[0m
 [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
  ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
  We detected multiple lockfiles and selected the directory of C:\Users\Windows\package-lock.json as the root directory.
@@ -17,10 +18,13 @@
    - Network:       http://192.168.1.122:3000
 
  ✓ Starting...
- ✓ Ready in 6.3s
-⚠ Console Ninja Turbopack support is a PRO feature, [33mcurrently available to community users while in preview[0m
- ○ Compiling / ...
+ ✓ Ready in 7.5s
+ ○ Compiling /pedidos/nuevo ...
 [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
- HEAD / 200 in 14.2s (compile: 13.5s, render: 684ms)
- GET / 200 in 373ms (compile: 14ms, render: 359ms)
- GET /pedidos 200 in 1288ms (compile: 1213ms, render: 76ms)
+ GET /pedidos/nuevo 200 in 23.3s (compile: 22.3s, render: 1024ms)
+ GET /pedidos/nuevo 200 in 2.5s (compile: 1654ms, render: 809ms)
+ HEAD / 200 in 765ms (compile: 663ms, render: 102ms)
+ GET / 200 in 339ms (compile: 11ms, render: 328ms)
+ GET /pedidos/nuevo 200 in 1917ms (compile: 258ms, render: 1659ms)
+ GET /pedidos/nuevo 200 in 503ms (compile: 173ms, render: 330ms)
+ GET /pedidos 200 in 1940ms (compile: 1806ms, render: 134ms)

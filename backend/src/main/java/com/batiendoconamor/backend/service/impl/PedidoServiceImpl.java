@@ -43,7 +43,12 @@ public class PedidoServiceImpl implements PedidoService {
         }
         pedido.setCliente(cliente);
 
-        BigDecimal totalPedido = BigDecimal.ZERO;
+        // Procesar precio adicional (si viene null, asumimos 0)
+        BigDecimal precioAdicional = dto.getPrecioAdicional() != null ? dto.getPrecioAdicional() : BigDecimal.ZERO;
+        pedido.setPrecioAdicional(precioAdicional);
+
+        // Iniciamos el total con el precio adicional
+        BigDecimal totalPedido = precioAdicional;
 
         // 2. Iterar sobre los productos del JSON
         for (DetalleRequestDTO detDto : dto.getDetalles()) {

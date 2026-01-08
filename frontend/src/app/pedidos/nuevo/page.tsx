@@ -39,6 +39,7 @@ export default function NuevoPedidoPage() {
   const [observaciones, setObservaciones] = useState('');
   const [idCliente, setIdCliente] = useState<number | ''>('');
   const [fechaEntrega, setFechaEntrega] = useState('');
+  const [precioAdicional, setPrecioAdicional] = useState<number | ''>('');
 
   const [carrito, setCarrito] = useState<{
     tempId: number;
@@ -112,6 +113,7 @@ export default function NuevoPedidoPage() {
         idCliente: Number(idCliente),
         fechaEntrega,
         observaciones,
+        precioAdicional: precioAdicional ? Number(precioAdicional) : 0,
         detalles
       });
 
@@ -131,7 +133,7 @@ export default function NuevoPedidoPage() {
       return sumOpt + (opt ? opt.precioExtra : 0);
     }, 0) * item.cantidad;
     return acc + precioBase + precioOpciones;
-  }, 0);
+  }, 0) + (precioAdicional ? Number(precioAdicional) : 0);
 
   return (
     <main className="pb-20 relative">
@@ -258,6 +260,20 @@ export default function NuevoPedidoPage() {
               <div className="flex justify-between"><span>Entrega:</span><span>{fechaEntrega || '-'}</span></div>
             </div>
             <div className="border-t pt-4 mt-4">
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700 mb-1">Costo Adicional / Decoración:</label>
+                <div className="relative">
+                  <span className="absolute left-3 top-2 text-gray-500">$</span>
+                  <input
+                    type="number"
+                    min="0"
+                    className="w-full border p-2 pl-6 rounded text-sm"
+                    placeholder="0"
+                    value={precioAdicional}
+                    onChange={e => setPrecioAdicional(e.target.value ? Number(e.target.value) : '')}
+                  />
+                </div>
+              </div>
               <div className="flex justify-between items-end mb-1">
                 <span className="text-gray-600">Total Estimado:</span>
                 <span className="text-3xl font-bold text-pink-600">${totalEstimado.toLocaleString()}</span>

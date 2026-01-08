@@ -23,6 +23,9 @@ public class Pedido {
     // BigDecimal es OBLIGATORIO para dinero. Double pierde precisión en decimales.
     private BigDecimal total;
 
+    // Costo adicional (decoración, etc.)
+    private BigDecimal precioAdicional;
+
     // Relación con Cliente (ManyToOne)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_cliente")

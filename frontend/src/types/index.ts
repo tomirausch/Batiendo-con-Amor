@@ -58,6 +58,7 @@ export interface Pedido {
   cliente: Cliente; // Reutilizamos la interfaz Cliente
   detalles: DetallePedido[];
   observaciones?: string;
+  precioAdicional?: number; // Costo extra
   cancelado: boolean;
   entregado: boolean;
   pagado: boolean;
@@ -76,6 +77,7 @@ export interface PedidoRequest {
   fechaEntrega: string; // YYYY-MM-DD
   detalles: DetalleRequest[];
   observaciones: string;
+  precioAdicional?: number;
 }
 
 // Agrega esto en src/types/index.ts

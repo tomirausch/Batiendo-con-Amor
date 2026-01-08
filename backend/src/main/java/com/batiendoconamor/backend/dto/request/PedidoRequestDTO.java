@@ -3,6 +3,7 @@ package com.batiendoconamor.backend.dto.request;
 import lombok.Data;
 import java.time.LocalDate;
 import java.util.List;
+import java.math.BigDecimal;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -20,6 +21,9 @@ public class PedidoRequestDTO {
 
     // Lista de productos solicitados
     private List<DetalleRequestDTO> detalles;
+
+    // Costo adicional opcional
+    private BigDecimal precioAdicional;
 
     private String observaciones;
 }
